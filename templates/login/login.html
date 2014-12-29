@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Cocociti | Online rental India. Rent anything online. Vacation homes, vehicles, things, books, adventure gear, Cameras. Make money sharing your stuff. Save money by renting from others.</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="{{STATIC_URL}}listing-assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}listing-assets/css/style.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="{{STATIC_URL}}listing-assets/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}listing-assets/plugins/font-awesome/css/font-awesome.min.css">
+
+    <!-- CSS Page Style -->    
+    <link rel="stylesheet" href="{{STATIC_URL}}listing-assets/css/pages/page_log_reg_v2.css">    
+
+    <!-- CSS Theme -->    
+    <link rel="stylesheet" href="{{STATIC_URL}}listing-assets/css/themes/blue.css" id="style_color">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="{{STATIC_URL}}listing-assets/css/custom.css">
+</head> 
+
+<body>
+<!--=== Style Switcher ===-->    
+
+<!--=== End Style Switcher ===-->    
+
+<!--=== Content Part ===-->    
+<div class="container">
+    <!--Reg Block-->
+    <div class="reg-block">
+        <div class="reg-block-header">
+            <h2>Sign In</h2>
+            <!-- <ul class="social-icons text-center">
+                <li><a class="rounded-x social_facebook" data-original-title="Facebook" href="#"></a></li>
+                <li><a class="rounded-x social_twitter" data-original-title="Twitter" href="#"></a></li>
+                <li><a class="rounded-x social_googleplus" data-original-title="Google Plus" href="#"></a></li>
+                <li><a class="rounded-x social_linkedin" data-original-title="Linkedin" href="#"></a></li>
+            </ul> -->
+           <!--  <p>Don't Have Account? Click <a class="color-green" href="/register/">Sign Up</a> to registration.</p> -->  
+            <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <input type="hidden" id="userid"/>
+                <input type="hidden" id="username"/>
+                <button type="submit" class="btn-u btn-block" onclick="login();">Log In</button>
+                <script type="text/javascript">
+                    function AuthCallback(response){
+                        alert("logged in");
+                    }
+                    function logout(){
+                        FB.logout();
+                        $('#fb_name').html('');
+                        $('#dp').html('');
+                        $('#login').html('<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>');
+
+                    }
+                    function statusChangeCallback(response) {
+                        console.log('statusChangeCallback');
+                        console.log(response);
+                        // The response object is returned with a status field that lets the
+                        // app know the current login status of the person.
+                        // Full docs on the response object can be found in the documentation
+                        // for FB.getLoginStatus().
+                        if (response.status === 'connected') {
+                          // Logged into your app and Facebook.
+                          $('.logreg').addClass("hidden");
+                          $('.myacc').removeClass("hidden");
+                          testAPI();
+
+                          
+                          
+                        } else if (response.status === 'not_authorized') {
+                          // The person is logged into Facebook, but not your app.
+                          $('.logreg').removeClass("hidden");
+                          $('.myacc').addClass("hidden");
+                          document.getElementById('status').innerHTML = 'Please log ' +
+                            'into this app.';
+                        } else {
+                          // The person is not logged into Facebook, so we're not sure if
+                          // they are logged into this app or not.
+                          $('.logreg').removeClass("hidden");
+                          $('.myacc').addClass("hidden");
+                          document.getElementById('status').innerHTML = 'please log in';
+
+                        }
+                      }
+
+                      // This function is called when someone finishes with the Login
+                      // Button.  See the onlogin handler attached to it in the sample
+                      // code below.
+                      function checkLoginState() {
+                        FB.getLoginStatus(function(response) {
+                          statusChangeCallback(response);
+                        });
+                      }
+
+                      window.fbAsyncInit = function() {
+                      FB.init({
+                        appId      : '363051183844429',
+                        cookie     : true,  // enable cookies to allow the server to access 
+                                            // the session
+                        status      : true,
+                        xfbml      : true,  // parse social plugins on this page
+                        version    : 'v2.1' // use version 2.1
+                      });
+
+                      // Now that we've initialized the JavaScript SDK, we call 
+                      // FB.getLoginStatus().  This function gets the state of the
+                      // person visiting this page and can return one of three states to
+                      // the callback you provide.  They can be:
+                      //
+                      // 1. Logged into your app ('connected')
+                      // 2. Logged into Facebook, but not your app ('not_authorized')
+                      // 3. Not logged into Facebook and can't tell if they are logged into
+                      //    your app or not.
+                      //
+                      // These three cases are handled in the callback function.
+
+                      FB.getLoginStatus(function(response) {
+                        statusChangeCallback(response);
+                      });
+
+                      };
+
+                      // Load the SDK asynchronously
+                      (function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "//connect.facebook.net/en_US/sdk.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                      }(document, 'script', 'facebook-jssdk'));
+
+                      // Here we run a very simple test of the Graph API after login is
+                      // successful.  See statusChangeCallback() for when this call is made.
+                      function testAPI() {
+                        console.log('Welcome!  Fetching your information.... ');
+                        FB.api('/me', function(response) {
+                          console.log('Successful login for: ' + response.name);
+                          userid = response.id;
+                          username = response.name;
+                            if(userid == ""){
+                              alert("no userid");
+                            }
+                            else {
+                                alert("userid : " + userid);
+                              $.ajax({
+                                url : "/sessionset/",
+                                data : $.param({ userid:userid,username:username,csrfmiddlewaretoken: '{{ csrf_token }}'}),
+                                method : "POST",
+                                success : function(d){
+                                  alert(d);
+                                  // if(d == 1){
+                                  //   loginland(response);
+                                  // }
+                                }
+                              });
+                            }
+                          // document.getElementById('status').innerHTML =
+                          //   'Thanks for logging in, ' + response.name + '!';
+                            // $('#fb_name').html(response.name);
+                            // $('#userid').val(response.id);
+                            // $('#username').val(response.name);
+
+                            
+                        });
+                        FB.api('/me/picture/?redirect=0&height=40&type=normal&width=40',function(response){
+                            // $('#fb_dp').css("background-image","url("+response.data.url+")");
+                            // alert(response.data.url);
+                            // $('#status').html(response.data.url);
+                        });
+                    }
+                    function login(){
+                        FB.login(function(response) {
+                           // handle the response
+                           if (response.authResponse) {
+                                console.log('Welcome!  Fetching your information.... ');
+                                FB.api('/me', function(response) {
+                                    console.log('Good to see you, ' + response.name + '.');
+                                    $('#userid').val(response.id);
+                                    $('#username').val(response.name);
+                                    // for(var i in response){
+                                    //     alert(" "+i+" "+response[i]);
+                                    // }
+                                    loginland(response);
+                                });
+                            } else {
+                                console.log('User cancelled login or did not fully authorize.');
+                            }
+                        }, {scope: 'public_profile'});
+
+                    }
+                    function loginland(res){
+                        var userid = $('#userid').val();
+                            var username = $('#username').val();
+                            var slug = "{{ slug }}";
+                            if(userid == ''){
+                                window.location.href='/login/'
+                            }
+                            else {
+                                $.ajax({
+                                    url: '/login-landing/',
+                                    type: 'POST',
+                                    async: 'false',
+                                    data: {userid: userid,username: username,csrfmiddlewaretoken: '{{ csrf_token }}'},
+                                    success: function(data){
+                                        if(data==1){
+                                            if(slug.length > 0){
+                                              window.location.href = "/product-page/{{ ownerid }}/{{ productid }}/{{ slug }}";
+                                            }
+                                            else {
+                                              window.location.href="/";  
+                                            }
+                                            
+                                        }
+                                        else {
+                                            if(slug.length > 0){
+                                              window.location.href="/register/{{ ownerid }}/{{ productid }}/{{ slug }}";  
+                                            }
+                                            else {
+                                              window.location.href="/register/";  
+                                            }
+                                            
+                                        }
+                                    },
+                                    error: function(response,status,error){
+                                        alert(error);
+                                    }
+                                });
+                            } 
+                    }
+                </script>
+
+            </div>
+        </div>      
+        </div>
+
+        <!-- <div class="input-group margin-bottom-20">
+            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+            <input type="text" class="form-control" placeholder="Email">
+        </div>
+        <div class="input-group margin-bottom-20">
+            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+            <input type="text" class="form-control" placeholder="Password">
+        </div>
+        <hr>
+        <label class="checkbox">
+            <input type="checkbox"> 
+            <p>Always stay signed in</p>
+        </label>
+                                
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <button type="submit" class="btn-u btn-block">Log In</button>
+
+            </div>
+        </div> -->
+    </div>
+    <!--End Reg Block-->
+</div><!--/container-->
+<!--=== End Content Part ===-->
+
+<!-- JS Global Compulsory -->           
+<script type="text/javascript" src="{{STATIC_URL}}listing-assets/plugins/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}listing-assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}listing-assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
+<!-- JS Implementing Plugins -->           
+<script type="text/javascript" src="{{STATIC_URL}}listing-assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}listing-assets/plugins/countdown/jquery.countdown.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}listing-assets/plugins/backstretch/jquery.backstretch.min.js"></script>
+<script type="text/javascript">
+    $.backstretch([
+      "{{STATIC_URL}}listing-assets/img/bg/5.jpg",
+      "{{STATIC_URL}}listing-assets/img/bg/4.jpg",
+      ], {
+        fade: 1000,
+        duration: 7000
+    });
+</script>
+<!-- JS Page Level -->           
+<script type="text/javascript" src="{{STATIC_URL}}listing-assets/js/app.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        App.init();
+
+        $.ajaxSetup({ cache: true });
+        $.getScript('//connect.facebook.net/en_US/all.js', function(){
+        FB.init({
+            appId: '363051183844429',
+        });     
+        // $('#loginbutton,#feedbutton').removeAttr('disabled');
+        // FB.getLoginStatus(updateStatusCallback);
+        });
+        
+    });
+</script>
+<!--[if lt IE 9]>
+    <script src="{{STATIC_URL}}assets/plugins/respond.js"></script>
+    <script src="{{STATIC_URL}}assets/plugins/html5shiv.js"></script>
+<![endif]-->
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29166220-1']);
+  _gaq.push(['_setDomainName', 'htmlstream.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</body>
+</html> 

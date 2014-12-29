@@ -1,0 +1,219 @@
+{% extends "header.html" %}
+{% block content %}
+    
+
+    <!--=== Content Part ===-->
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row margin-bottom-5">
+                    <div class="col-sm-6 result-category">
+                        <h2>{{ subcat }}</h2>
+                        <small class="shop-bg-red badge-results">{{ products.count }} Results</small>
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="list-inline clear-both">
+                            <li class="grid-list-icons">
+                                <!-- <a href="shop-ui-filter-list.html"><i class="fa fa-th-list"></i></a> -->
+                                <!-- <a href="shop-ui-filter-grid.html"><i class="fa fa-th"></i></a> -->
+                            </li>
+                            <li class="sort-list-btn">
+                                <h3>Show :</h3>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        Type <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">All</a></li>
+                                        <li><a href="/subcatselect/{{ subcatid }}/rent/">Products On Rent</a></li>
+                                        <li><a href="/subcatselect/{{ subcatid }}/sale/">Products On Sale</a></li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div> 
+                </div>
+                <!-- <div class="row margin-bottom-5">
+                    <div class="col-sm-4 result-category"></div>
+                    <div class="col-sm-8">
+                        <ul class="list-inline clear-both">
+                            
+                            <li class="sort-list-btn">
+                                <h3>Sort By :</h3>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        Popularity <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">All</a></li>
+                                        <li><a href="#">Best Sales</a></li>
+                                        <li><a href="#">Top Last Week Sales</a></li>
+                                        <li><a href="#">New Arrived</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="sort-list-btn">
+                                <h3>Show :</h3>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        20 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">All</a></li>
+                                        <li><a href="#">10</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li><a href="#">3</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>    
+                </div> --><!--/end result category-->
+
+                <div class="filter-results">
+                {% if products %}
+                    <div class="row illustration-v2 margin-bottom-30">
+                    {% for i in products %}
+                        <div class="col-md-4">
+                            <div class="product-img product-img-brd">
+                                <a href="#"><img class="full-width img-responsive" src="{{ MEDIA_URL }}{{ i.product_pic }}" alt=""></a>
+                                <!-- <a class="product-review" href="/product-page/{{ i.owner_id }}/{{ i.id }}/{{ i.slug }}">Quick review</a> -->
+                                {% if i.rent == '0' and i.sell == '0' %}
+                                <a class="out-of-stock" href="#"><i class="fa fa-ban"></i>Out Of Stock :(</a>
+                                {% else %}
+                                <a class="add-to-cart" href="/product-page/{{ i.owner_id }}/{{ i.id }}/{{ i.slug }}"><i class="fa fa-shopping-cart"></i>Coco It !!</a>
+                                {% endif %}
+                                {% if i.rent == '1' and i.sell == '1' %}
+                                <div class="shop-rgba-dark-green rgba-banner">For Rent and Sale</div>
+                                {% elif i.rent == '1' and i.sell == '0' %}
+                                <div class="shop-rgba-dark-green rgba-banner">For Rent</div>
+                                {% elif i.rent == '0' and i.sell == '1' %}
+                                <div class="shop-rgba-dark-green rgba-banner">For Sale</div>
+                                {% else %}
+                                <div class="shop-rgba-red rgba-banner">Out of stock</div>
+                                {% endif %}
+
+                            </div> 
+                            <div class="product-description product-description-brd margin-bottom-30">
+                                <div class="overflow-h margin-bottom-5">
+                                    <div class="pull-left">
+                                        
+
+                                        {% if i.rent == '0' and i.sell == '0' %}
+                                        <h4 class="title-out-of-stock"><a href="#">{{ i.product_title }}</a></h4>
+                                        {% else %}
+                                        <h4 class="title-price"><a href="/product-page/{{ i.owner_id }}/{{ i.id }}/{{ i.slug }}">{{ i.product_title }}</a></h4>
+                                        {% endif %}
+
+
+                                        <span class="gender text-uppercase">{{ subcat }}</span>
+                                        <!-- <span class="gender">Suits - Blazers</span> -->
+                                    </div>    
+                                    <div class="product-price">
+                                        {% if i.rent == '1' and i.sell == '1' %}
+                                        <span class="title-price">Rs. {{ i.price }}/day</span>
+                                        <span class="title-price">Rs. {{ i.sellprice }}/-</span>
+                                        {% elif i.rent == '1' and i.sell == '0' %}
+                                        <span class="title-price">Rs. {{ i.price }}/day</span>
+                                        {% elif i.rent == '0' and i.sell == '1' %}
+                                        <span class="title-price">Rs. {{ i.sellprice }}/-</span>
+                                        {% else %}
+                                        <span class="title-price">Out of Stock :(</span>
+                                        {% endif %}
+                                        
+                                    </div>
+                                </div>    
+                                <ul class="list-inline product-ratings">
+                                    <li><i class="rating-selected fa fa-star"></i></li>
+                                    <li><i class="rating-selected fa fa-star"></i></li>
+                                    <li><i class="rating-selected fa fa-star"></i></li>
+                                    <li><i class="rating fa fa-star"></i></li>
+                                    <li><i class="rating fa fa-star"></i></li>
+                                    <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
+                                </ul>    
+                            </div>
+                        </div>
+                    {% if forloop.counter|divisibleby:3 %}
+                    </div>
+                    <div class="row illustration-v2 margin-bottom-30">
+                    {% endif %}
+                    {% endfor %}
+                    </div>
+                {% endif %}
+                        <!-- <div class="col-md-4">
+                            <div class="product-img product-img-brd">
+                                <a href="#"><img class="full-width img-responsive" src="{{ STATIC_URL }}assets/img/blog/17.jpg" alt=""></a>
+                                <a class="product-review" href="shop-ui-inner.html">Quick review</a>
+                                <a class="add-to-cart" href="/productpage/"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            </div> 
+                            <div class="product-description product-description-brd margin-bottom-30">
+                                <div class="overflow-h margin-bottom-5">
+                                    <div class="pull-left">
+                                        <h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4>
+                                        <span class="gender text-uppercase">Men</span>
+                                        <span class="gender">Suits - Blazers</span>
+                                    </div>    
+                                    <div class="product-price">
+                                        <span class="title-price">$60.00</span>
+                                        <span class="title-price line-through">$95.00</span>
+                                    </div>
+                                </div>    
+                                <ul class="list-inline product-ratings">
+                                    <li><i class="rating-selected fa fa-star"></i></li>
+                                    <li><i class="rating-selected fa fa-star"></i></li>
+                                    <li><i class="rating-selected fa fa-star"></i></li>
+                                    <li><i class="rating fa fa-star"></i></li>
+                                    <li><i class="rating fa fa-star"></i></li>
+                                    <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
+                                </ul>    
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="product-img product-img-brd">
+                                <a href="#"><img class="full-width img-responsive" src="{{ STATIC_URL }}assets/img/blog/18.jpg" alt=""></a>
+                                <a class="product-review" href="shop-ui-inner.html">Quick review</a>
+                                <a class="add-to-cart" href="/productpage/"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            </div> 
+                            <div class="product-description product-description-brd margin-bottom-30">
+                                <div class="overflow-h margin-bottom-5">
+                                    <div class="pull-left">
+                                        <h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4>
+                                        <span class="gender text-uppercase">Men</span>
+                                        <span class="gender">Suits - Blazers</span>
+                                    </div>    
+                                    <div class="product-price">
+                                        <span class="title-price">$95.00</span>
+                                    </div>
+                                </div>    
+                                <ul class="list-inline product-ratings">
+                                    <li><i class="rating-selected fa fa-star"></i></li>
+                                    <li><i class="rating-selected fa fa-star"></i></li>
+                                    <li><i class="rating-selected fa fa-star"></i></li>
+                                    <li><i class="rating fa fa-star"></i></li>
+                                    <li><i class="rating fa fa-star"></i></li>
+                                    <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
+                                </ul>    
+                            </div>
+                        </div> -->
+                    </div>
+
+                    
+                </div><!--/end filter resilts-->
+
+                <!-- <div class="text-center">
+                    <ul class="pagination pagination-v2">
+                        <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                        <li><a href="#">1</a></li>
+                        <li class="active"><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                    </ul>                                                            
+                </div> --><!--/end pagination-->
+            </div>
+        </div><!--/end row-->
+    </div><!--/end container-->    
+    <!--=== End Content Part ===-->
+{% endblock content %}
+

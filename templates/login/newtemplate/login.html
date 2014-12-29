@@ -1,0 +1,115 @@
+{% extends "header.html" %}
+{% block externalcss %}
+<!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}assets/css/shop.style.css">
+     
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}assets/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}assets/plugins/scrollbar/src/perfect-scrollbar.css">
+
+    <!-- CSS Page Style -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}assets/css/pages/log-reg-v3.css">
+
+    <!-- CSS Theme -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}assets/css/theme-colors/default.css">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}assets/css/custom.css">
+{% endblock externalcss %}
+{% block content %}
+<!--=== Login ===-->
+    <div class="log-reg-v3 content-md">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <form id="sky-form1" class="log-reg-block sky-form">
+                        <h2>Log in to your account</h2>
+
+                        <section>
+                            <label class="input login-input">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <input type="email" placeholder="Email Address" name="email" class="form-control">
+                                </div>
+                            </label>
+                        </section>        
+                        <section>
+                            <label class="input login-input no-border-top">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                    <input type="password" placeholder="Password" name="password" class="form-control">
+                                </div>    
+                            </label>
+                        </section>
+                        <div class="row margin-bottom-5">
+                            <div class="col-xs-6">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="checkbox"/>
+                                    <i></i>
+                                    Remember me
+                                </label>
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <a href="#">Forget your Password?</a>
+                            </div>
+                        </div>
+                        <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Log in</button>
+
+                        <div class="border-wings">
+                            <span>or</span>
+                        </div>
+                            
+                        <div class="row columns-space-removes">
+                            <div class="col-lg-12 margin-bottom-10">
+                                <button type="button" class="btn-u btn-u-md btn-u-fb btn-block"><i class="fa fa-facebook"></i> Facebook Log In</button>
+                            </div>
+                            <!-- <div class="col-lg-6">
+                                <button type="button" class="btn-u btn-u-md btn-u-tw btn-block"><i class="fa fa-twitter"></i> Twitter Log In</button>
+                            </div> -->
+                        </div>
+                    </form>
+                    
+                    <div class="margin-bottom-20"></div>
+                    <p class="text-center">Don't have account yet? Learn more and <a href="shop-ui-register.html">Sign Up</a></p>
+                </div>
+                <div class="col-md-3"></div>
+            </div><!--/end row-->
+        </div><!--/end container-->
+    </div>
+<!--=== End Login ===-->
+{% endblock content %}
+{% block externaljs %}
+<!-- JS Global Compulsory -->           
+<script src="{{ STATIC_URL }}assets/plugins/jquery/jquery.min.js"></script>
+<script src="{{ STATIC_URL }}assets/plugins/jquery/jquery-migrate.min.js"></script>
+<script src="{{ STATIC_URL }}assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- JS Implementing Plugins -->
+<script src="{{ STATIC_URL }}assets/plugins/back-to-top.js"></script>
+<!-- Login Form -->
+<script src="{{ STATIC_URL }}assets/plugins/sky-forms/version-2.0.1/js/jquery.form.min.js"></script>
+<!-- Validation Form -->
+<script src="{{ STATIC_URL }}assets/plugins/sky-forms/version-2.0.1/js/jquery.validate.min.js"></script>
+<!-- Scrollbar -->
+<script src="{{ STATIC_URL }}assets/plugins/scrollbar/src/jquery.mousewheel.js"></script>
+<script src="{{ STATIC_URL }}assets/plugins/scrollbar/src/perfect-scrollbar.js"></script>
+<!-- JS Customization -->
+<script src="{{ STATIC_URL }}assets/js/custom.js"></script>
+<!-- JS Page Level -->
+<script src="{{ STATIC_URL }}assets/js/shop.app.js"></script>
+<script src="{{ STATIC_URL }}assets/js/forms/page_login.js"></script>
+<script src="{{ STATIC_URL }}assets/js/forms/page_contact_form.js"></script>
+<script>
+    jQuery(document).ready(function() {
+        App.init();
+        Login.initLogin();
+        PageContactForm.initPageContactForm();      
+    });
+</script>
+{% endblock externaljs %}

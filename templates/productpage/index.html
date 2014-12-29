@@ -1,0 +1,582 @@
+{% extends "header.html" %}
+    {% block externalcss %}
+    {{ block.super }}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <meta name="title" content="Product Page"> -->
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/css/style.css">
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"> -->
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/plugins/font-awesome/css/font-awesome.min.css">
+
+    <!-- CSS Page Style -->    
+    <link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/css/pages/page_job_inner.css">
+
+    <!-- CSS Theme -->    
+    <link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/css/themes/blue.css" id="style_color">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/css/custom.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}listing-assets/css/typeahead.css">
+    <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"> -->
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"> -->
+    {% endblock externalcss %}
+    
+{% block content %}    
+
+<div class="wrapper">
+    
+
+    <!--=== Image Block ===-->
+    <div class="image-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="company-description">
+                        <img src="{{MEDIA_URL}}{{product.product_pic}}" class="img-responsive">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="company-description">
+                        <div class="shadow-wrapper margin-bottom-60">
+                            <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+                                <div class="price-top row">
+                                    <div class="col-md-5">
+                                        <button class="btn-u btn-u-blue center-block pull-right rent-btn">Rent</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                        
+                                    </div>
+                                    <div class="col-md-5">
+                                        <button class="btn-u btn-u-blue center-block pull-left sale-btn">Buy</button>
+                                    </div>
+                                </div>
+                                <!-- <br /> -->
+
+                                <div class="rent-tag-box">
+                                <div class="form-group">
+                                    <center>
+                                            <!-- {{ product.rent|length }}    -->
+                                    </center>
+                                    
+                                </div>
+                                {% if product.rent == '1' %}
+                                    <h3>For Rent</h3>
+                                    <form action="" class="sky-form" id="sky-form">
+                                        <fieldset>
+                                            <label class="label">Select date range</label>  
+                                                <div class="row">   
+                                                    <section class="col col-6">
+                                                        <label class="input">
+                                                            <i class="icon-append fa fa-calendar"></i>
+                                                            <input type="text" name="start" id="start" placeholder="Start date">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-6">
+                                                        <label class="input">
+                                                            <i class="icon-append fa fa-calendar"></i>
+                                                            <input type="text" name="finish" id="finish" placeholder="Expected finish date">
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                        <tr>                                                        
+                                                            <td class="center-block">No. of days</td>
+                                                            <td class="daydiff"></td>
+                                                        </tr>
+                                                        <tr>                                                        
+                                                            <td class="center-block">Security Deposit</td>
+                                                            <td>{{ product.security_deposits }}</td>
+                                                        </tr>
+                                                        <tr>                                                        
+                                                            <td class="center-block">Coco Cost</td>
+                                                            <td class="cococost">10%</td>
+                                                        </tr>
+                                                        <tr>                                                        
+                                                            <td class="center-block">You have to pay</td>
+                                                            <td class="fp">{{ product.price }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                 <button class="btn-u btn-u-blue center-block" type="button" onClick="addToCartRent();"><span class="pull-left"><i class="fa fa-shopping-cart"></i></span>&nbsp;&nbsp;<span class="pull-right">Add to Cart</span></button>
+                                        </fieldset>
+                                    </form>
+                                {% elif product.rent == '0' %}
+                                    <h3>This product is not for rent</h3>
+                                {% endif %}
+                                
+                                </div>
+                                <div class="sale-tag-box" style="display:none;">
+                                {% if product.sell == '0' %}
+                                    <h3>This product is not for sale</h3>
+                                {% elif product.sell == '1' %}
+                                    <h3>For Sale</h3>
+                                    <form action="" class="sky-form" id="sky-form">
+                                        <fieldset>
+                                            <table class="table table-hover">
+                                                <tbody>
+                                                    <tr>                                                        
+                                                        <td class="center-block">Cost of the Product</td>
+                                                        <td>{{ product.sellprice }}</td>
+                                                    </tr>
+                                                    <tr>                                                        
+                                                        <td class="center-block">Coco Cost</td>
+                                                        <td>0%</td>
+                                                    </tr>
+                                                    <tr>                                                        
+                                                        <td class="center-block">You have to pay</td>
+                                                        <td>{{ product.sellprice }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <button class="btn-u btn-u-blue center-block" type="button" onclick="addToCartSale();"><span class="pull-left"><i class="fa fa-shopping-cart"></i></span>&nbsp;&nbsp;<span class="pull-right">Add to Cart</span></button>
+                                        </fieldset>
+                                    </form>
+                                {% endif %}   
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+               
+        </div>    
+    </div>    
+    <!--=== End Image Block ===-->
+
+    <!--=== Full Width Block ===-->
+    <div class="full-w-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div class="info-blocks">
+                        <i class="fa fa-bookmark-o icon-info-blocks"></i>
+                        <div class="info-blocks-in">
+                            {% if product.rent == '1' and product.sell == '0' %}
+                            <h3>For Rent</h3>
+                            {% elif product.sell == '1' and product.rent == '0' %}
+                            <h3>For Sale</h3>
+                            {% else %}
+                            <h3>For Rent and Sale</h3>
+                            {% endif %}
+                            <!-- <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4">
+                    <div class="info-blocks">
+                        <i class="fa fa-calendar icon-info-blocks"></i>
+                        <div class="info-blocks-in">
+                            <h3>Available Now!!</h3>
+                            <!-- <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4">
+                    <div class="info-blocks">
+                        <i class="fa fa-inr icon-info-blocks"></i>
+                        <div class="info-blocks-in">
+                            <!-- <h3>{{ product.price }} per day</h3> -->
+                            {% if product.rent == '1' and product.sell == '0' %}
+                            <h3>{{ product.price }} per day</h3>
+                            {% elif product.sell == '1' and product.rent == '0' %}
+                            <h3>{{ product.price }}</h3>
+                            {% else %}
+                            <h3>At Cool Prices!!</h3>
+                            {% endif %}
+                            <!-- <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>    
+    <!--=== End Full Width Block ===-->   
+
+    <!--=== Block Description ===-->
+    <div class="block-description">
+        <div class="container">
+            <i class="center-icon rounded-x fa fa-edit"></i>
+            <div class="title-box-v2">
+                <h2>Product Description</h2>
+                <!-- <p>Pellentesque et erat ac massa cursus porttitor eget sed magna.</p> -->
+            </div> 
+
+            <div class="row">
+                <!-- Left Inner -->
+                <div class="col-md-7">
+                    <div class="left-inner">
+                        <!-- <img src="{{ STATIC_URL }}listing-assets/img/clients/walmart.png" alt=""> -->
+                        <h3>{{ product.product_title }}</h3>
+                        <a href="#"><i class="position-top fa fa-print"></i></a>
+                        <div class="overflow-h">
+                            
+                            <ul class="list-inline star-vote">
+                                <li><i class="color-green fa fa-star"></i></li>
+                                <li><i class="color-green fa fa-star"></i></li>
+                                <li><i class="color-green fa fa-star"></i></li>
+                                <li><i class="color-green fa fa-star-half-o"></i></li>
+                                <li><i class="color-green fa fa-star-o"></i></li>
+                            </ul>
+                            <span><a href="#">34 reviews</a></span>
+                        </div>    
+                        
+                        <hr>
+
+                        
+                        
+                        
+
+                        <h2>Description</h2>
+                        <p>{{ product.product_details }}</p>
+
+                        <hr>
+
+                        <h2>Other Information</h2>
+                        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis varius hendrerit nisl id condimentum. Sed bibendum ultricies erat a vulputate. Curabitur id ultricies eros, at ultricies dui.</p> -->
+                        <ul class="list-unstyled">
+                            {% if product.buyingprice %}
+                            <li><i class="fa fa-check color-green"></i> Buying Price :- {{ product.buyingprice }} </li>
+                            {% endif %}
+                            {% if product.warranty == '1' %}
+                            <li><i class="fa fa-check color-green"></i> The product is in warranty period.</li>
+                            {% else %}
+                            <li><i class="fa fa-check color-green"></i> The product is out of warranty period.</li>
+                            {% endif %}
+                            <li><i class="fa fa-check color-green"></i> {{ product.explicit_terms_conditions }}</li>
+                        </ul>
+
+                        
+                    </div>
+                </div>
+                <!-- End Left Inner -->
+                
+                <!-- Right Inner -->
+                <div class="col-md-5"> 
+                    <div class="right-inner">
+                        <h3>Posted by</h3>
+
+                        <img src="{{ STATIC_URL }}assets/img/user.jpg" alt="" id="p_owner_dp" class="img-responsive" >
+                        <div class="overflow-h">
+                            <span class="font-s">{{ owner.username }}</span>
+                            
+                            <ul class="social-icons">
+                                <li></li>
+                                
+                            </ul>
+                        </div>
+                        <hr>
+
+                        <h3>Overview</h3>
+                        <div class="row">
+                            <!-- Overview -->
+                            <div class="col-sm-6">
+                                <div class="overview">
+                                    <i class="fa fa-user"></i>
+                                    <div class="overflow-h">
+                                        <small>Followers</small>
+                                        <small class="nofols">{{ nofol }}</small>
+                                        <div class="progress progress-u progress-xxs">
+                                            <div style="width: 92%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="92" role="progressbar" class="progress-bar progress-bar-u">
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                            <!-- End Overview -->
+
+                            <!-- Overview -->
+                            <div class="col-sm-6">
+                                <div class="overview">
+                                    <i class="fa fa-share"></i>
+                                    <div class="overflow-h">
+                                        <small>VieSharews</small>
+                                        <small>749k</small>
+                                        <div class="progress progress-u progress-xxs">
+                                            <div style="width: 77%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="77" role="progressbar" class="progress-bar progress-bar-u">
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                            <!-- End Overview -->
+                        </div>
+
+                        <div class="row margin-bottom-20">
+                            <!-- Overview -->
+                            <div class="col-sm-6">
+                                <div class="overview">
+                                    <i class="fa fa-eye"></i>
+                                    <div class="overflow-h">
+                                        <small>Views</small>
+                                        <small>15,7k</small>
+                                        <div class="progress progress-u progress-xxs">
+                                            <div style="width: 88%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="88" role="progressbar" class="progress-bar progress-bar-u">
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                            <!-- End Overview -->
+                            
+                            <!-- Overview -->
+                            <div class="col-sm-6">
+                                <div class="overview">
+                                    <i class="fa fa-group"></i>
+                                    <div class="overflow-h">
+                                        <small>Opportunity Views</small>
+                                        <small>202,8k</small>
+                                        <div class="progress progress-u progress-xxs">
+                                            <div style="width: 76%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="76" role="progressbar" class="progress-bar progress-bar-u">
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                            <!-- End Overview -->
+                        </div>
+
+                        <!-- Pie Chart Progress Bar -->    
+                            
+                        <!-- End Pie Chart Progress Bar -->
+
+                        <!-- <hr>
+
+                        <h3>What People are Saying about Company</h3>
+                        <div class="people-say margin-bottom-20">
+                            <img src="{{ STATIC_URL }}listing-assets/img/testimonials/img2.jpg" alt="">
+                            <div class="overflow-h">
+                                <span>Eva Maria Kl.</span>
+                                <small class="hex pull-right">5 - hours ago</small>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis varius hendrerit nisl id condimentum.</p>
+                            </div>    
+                        </div>
+
+                        <div class="people-say margin-bottom-20">
+                            <img src="{{ STATIC_URL }}listing-assets/img/testimonials/user.jpg" alt="">
+                            <div class="overflow-h">
+                                <span>Christian Draxler</span>
+                                <small class="hex pull-right">2 - days ago</small>
+                                <p>Vestibulum justo est, pharetra fermentum justo in, tincidunt mollis turpis. Duis imperdiet non justo euismod semper.</p>
+                            </div>    
+                        </div>
+
+                        <div class="people-say">
+                            <img src="{{ STATIC_URL }}listing-assets/img/testimonials/img3.jpg" alt="">
+                            <div class="overflow-h">
+                                <span>Alex Taylor</span>
+                                <small class="hex pull-right">3 - days ago</small>
+                                <p>A Wal-Mart cashier is responsible for effectively executing and adhering to the “Basic Beliefs” of the founder.</p>
+                            </div>    
+                        </div> -->
+
+                        <hr> 
+
+                        <a href="/profile/{{ owner.userid }}/" class="btn-u btn-block center-block"> View Profile</a>
+                    </div>   
+                </div>
+                <!-- End Right Inner -->
+            </div>    
+        </div>   
+    </div>
+    <input type="hidden" class="bp" value="{{ product.price }}" />    
+    <!--=== End Block Description ===-->
+
+    
+    <!--=== Contacts ===-->
+        
+    <!--=== End Contacts ===-->
+
+    <!--=== Footer Version 3 ===-->
+    
+    <!--=== End Footer Version 3 ===-->
+</div><!--/End Wrapepr-->
+
+<!-- JS Global Compulsory -->
+
+
+<!-- JS Implementing Plugins -->
+{% block externaljs %}
+{{ block.super }}
+<!-- <script type="text/javascript" src="{{ STATIC_URL }}listing-assets/plugins/circles-master/circles.js"></script> -->
+<!-- <script src="{{ STATIC_URL }}listing-assets/plugins/sky-forms/version-2.0.1/js/jquery-ui.min.js"></script> -->
+<!-- Datepicker Form -->
+<!-- <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script> -->
+<!-- <script type="text/javascript" src="{{ STATIC_URL }}listing-assets/js/app.js"></script> -->
+<script type="text/javascript" src="{{ STATIC_URL }}listing-assets/js/pages/index.js"></script>
+<script src="{{ STATIC_URL }}listing-assets/plugins/sky-forms/version-2.0.1/js/jquery-ui.min.js"></script>
+<!-- JS Page Level -->           
+<script type="text/javascript" src="{{ STATIC_URL }}listing-assets/js/pages/page_contacts.js"></script>
+<!-- <script type="text/javascript" src="{{ STATIC_URL }}listing-assets/js/plugins/circles-master.js"></script> -->
+<script type="text/javascript" src="{{ STATIC_URL }}listing-assets/js/plugins/datepicker.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}listing-assets/js/typeahead.js"></script>
+
+<script type="text/javascript">
+   $(function() {
+        // CirclesMaster.initCirclesMaster1();
+        Datepicker.initDatepicker();
+        var books = new Bloodhound({
+                datumTokenizer: function (datum) {
+                    return Bloodhound.tokenizers.whitespace(datum.value);
+                },
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: 'https://www.googleapis.com/books/v1/volumes?q=%QUERY',
+                    filter: function (books) {
+                        return $.map(books.items, function (book) {
+                            return {
+                                value: book.volumeInfo.title
+                            };
+                        });
+                    }
+                }
+            });
+
+            // Initialize the Bloodhound suggestion engine
+            books.initialize();
+            $('#typeahead').typeahead(null, {
+                displayKey: 'value',
+                source: books.ttAdapter(),
+                highlight: true
+            });
+            $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
+$('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
+    });
+   var $days = $(".daydiff"); 
+
+// set up the custom event handler
+    $days.bind("contentchange", function() {
+        var days = parseInt($days.html());
+        var basep = parseInt($('.bp').attr('value'));
+        var fp = parseInt(basep*days + (0.1 * basep*days) + ({{ product.security_deposits }}+0));
+        $('.fp').html(fp);
+    });
+    $('.rent-btn').click(function(){
+        $('.sale-tag-box').css('display','none');
+        $('.rent-tag-box').css('display','block');
+    });
+    $('.sale-btn').click(function(){
+        $('.rent-tag-box').css('display','none');
+        $('.sale-tag-box').css('display','block');
+        
+    });
+    function follow(){
+        $.ajax({
+            url : 'follow/',
+            type : 'post',
+            success : function(data){
+                // alert(data.fols);
+                $('.nofols').html(data.fols);
+            }
+
+        });
+    }
+
+    function addToCartRent(){
+        var s = $('#start').datepicker('getDate');
+        var sd = s.getDate();
+        var sm = s.getMonth()+1;
+        var sy = s.getFullYear();
+        var st = ""+sd+"/"+sm+"/"+sy
+        // alert(typeof(sm)+" "+sm);
+        var f = $('#finish').datepicker('getDate');
+        var fd = f.getDate();
+        var fm = f.getMonth()+1;
+        var fy = f.getFullYear();
+        var fn = ""+fd+"/"+fm+"/"+fy
+        var noofday = $('.daydiff').html();
+        var path = window.location.pathname.split('/');
+        var noprod = 1;
+        var product = ''+path[2]+'/'+path[4];
+        // alert("added to cart : "+s+" "+f+" "+noofday+" "+product+" "+noprod);
+        var userid = '{{ request.session.userid }}';
+        if(userid.length != 0){
+            $.ajax({
+                url : '/add-to-rent-cart',
+                data : $.param({ start:st,end:fn,day:noofday,product:product,noprod:noprod }),
+                type : 'GET',
+                success : function(data){
+                    if(data['suc'] == 1){
+                        alert("added to cart");
+                        $('#cartlength').html("{{ request.session.cartlength }}");
+                    }
+                    else{
+                        if(data['suc'] == 2){
+                            alert("Already added to the cart.");
+                        }
+                    }
+                },
+                error : function(req,status,error){
+                    alert(error);
+                }
+
+            });    
+        }
+        else {
+            alert("Login First.");
+            window.location.href = "/login/{{ product.owner_id }}/{{ product.id }}/{{ product.slug }}";
+        }
+        
+
+    }
+
+    function addToCartSale(){
+        var path = window.location.pathname.split('/');
+        var noprod = 1;
+        var product = ''+path[2]+'/'+path[4];
+        var userid = '{{ request.session.userid }}';
+        if(userid.length != 0){
+            $.ajax({
+                url : '/add-to-sale-cart',
+                data : $.param({ product:product,noprod:noprod }),
+                type : 'GET',
+                success : function(data){
+                    if(data['suc'] == 1){
+                        $('#cartlength').html("{{ request.session.cartlength }}");
+                        alert("added to cart");
+                        
+                    }
+                    else{
+                        if(data['suc'] == 2){
+                            alert("Already added to the cart.");
+                        }
+                    }
+                }
+            });    
+        }
+        else {
+            alert("Login First.");
+            window.location.href = "/login/{{ product.owner_id }}/{{ product.id }}/{{ product.slug }}";
+        }
+        
+
+    }
+
+
+</script>
+
+
+{% endblock externaljs %}
+
+
+ <!--[if lt IE 9]>
+    <script src="{{ STATIC_URL }}listing-assets/plugins/respond.js"></script>
+    <script src="{{ STATIC_URL }}listing-assets/plugins/html5shiv.js"></script>
+<![endif]-->
+{% endblock content %}

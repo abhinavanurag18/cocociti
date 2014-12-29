@@ -1,0 +1,207 @@
+{% extends "header.html" %}
+{% block externalcss %}
+{{ block.super }}
+<link href="{{ STATIC_URL }}/listingforms/css/listingforms.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}/listingforms/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}assets/plugins/master-slider/quick-start/masterslider/style/masterslider.css">
+<link rel='stylesheet' href="{{ STATIC_URL }}assets/plugins/master-slider/quick-start/masterslider/skins/default/style.css">
+<link href="{{ STATIC_URL }}/listingforms/css/listingforms.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}/listingforms/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+<link href="{{ STATIC_URL }}/listingforms/css/bootstrap-select.css" media="all" rel="stylesheet" type="text/css" />
+<link href="{{ STATIC_URL }}/listingforms/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/css/pages/profile.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/plugins/scrollbar/src/perfect-scrollbar.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}listing-assets/css/typeahead.css">
+{% endblock externalcss %}
+{% block content %}
+<div class="profile">
+	<div class="container">
+		<div class="profile-body margin-bottom-20">
+			<div class="tab-v5">
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="active"><a href="#description" role="tab" data-toggle="tab">Edit you profile</a></li>
+					<li><a href="#reviews" role="tab" data-toggle="tab">Manage Your Listings</a></li>
+
+				</ul>
+
+				<div class="tab-content">
+					<!-- Description -->
+					<div class="tab-pane fade in active" id="description">
+						<div class="profile-body margin-bottom-20">
+							<div class="tab-v1">
+
+
+								<div class="tab-content">
+
+									<div id="basic" class="profile-edit tab-pane fade in active">
+										<div class="sky-form" id="sky-form4">
+											<h2 class="heading-md">To change any value, edit it here and click on submit.</h2>
+											<br />
+											<form action="/edit-user-info-submit/{{ user.userid }}/" method="post" class="edit-user-info">
+												{% csrf_token %}
+												<dl class="dl-horizontal">
+													<dt>Phone Number 1</dt>
+													<dd>
+
+														<section>
+															<label class="input">
+																<i class="icon-append fa fa-user"></i>
+
+																<input type="text" placeholder="" name="phone1" id="phone1" required>
+
+																<b class="tooltip tooltip-bottom-right">Displayed as the product name everywhere on the website</b>
+															</label>
+														</section>
+													</dd>
+													<dt>Phone Number 2</dt>
+													<dd>
+
+														<section>
+															<label class="input">
+																<i class="icon-append fa fa-user"></i>
+
+																<input type="text" placeholder="" name="phone2" id="phone2" required>
+
+																<b class="tooltip tooltip-bottom-right">Displayed as the product name everywhere on the website</b>
+															</label>
+														</section>
+													</dd>
+													<dt>Address</dt>
+													<dd>
+
+														<section>
+															<label class="input">
+																<i class="icon-append fa fa-user"></i>
+
+																<input type="text" placeholder="Flat no./House Name etc." name="add" id="address" required>
+
+																<b class="tooltip tooltip-bottom-right">Displayed as the product name everywhere on the website</b>
+															</label>
+														</section>
+													</dd>
+													<dt>Email</dt>
+													<dd>
+
+														<section>
+															<label class="input">
+																<i class="icon-append fa fa-user"></i>
+
+																<input type="email" placeholder="" name="email" id="email" required>
+
+																<b class="tooltip tooltip-bottom-right">Displayed as the product name everywhere on the website</b>
+															</label>
+														</section>
+													</dd>   
+												</dl>
+												<input class="btn-u btn-u-sea-shop btn-u-sm" type="submit"></input>
+											</form>
+										</div>
+
+									</div>    
+								</div>
+							</div>    
+						</div>
+					</div>
+					<!-- End Description -->
+
+					<!-- Reviews -->                
+					<div class="tab-pane fade" id="reviews">
+
+						<div class="filter-results">
+							{% if products %}
+							<div class="row illustration-v2 margin-bottom-30">
+								{% for i in products %}
+								<div class="col-md-4">
+									<div class="product-img product-img-brd">
+										<a href="#"><img class="full-width img-responsive" src="{{ MEDIA_URL }}{{ i.product_pic }}" alt=""></a>
+										<!-- <a class="product-review" href="/product-page/{{ i.owner_id }}/{{ i.id }}/{{ i.slug }}">Quick review</a> -->
+										
+										<a class="add-to-cart" href="/manage/{{ i.owner_id }}/{{ i.id }}/{{ i.slug }}"><i class="fa fa-cogs"></i>Manage This Listing</a>
+										
+										{% if i.rent == '1' and i.sell == '1' %}
+										<div class="shop-rgba-dark-green rgba-banner">For Rent and Sale</div>
+										{% elif i.rent == '1' and i.sell == '0' %}
+										<div class="shop-rgba-dark-green rgba-banner">For Rent</div>
+										{% elif i.rent == '0' and i.sell == '1' %}
+										<div class="shop-rgba-dark-green rgba-banner">For Sale</div>
+										{% else %}
+										<div class="shop-rgba-red rgba-banner">Out of stock</div>
+										{% endif %}
+
+									</div> 
+									<div class="product-description product-description-brd margin-bottom-30">
+										<div class="overflow-h margin-bottom-5">
+											<div class="pull-left">
+
+
+												{% if i.rent == '0' and i.sell == '0' %}
+												<h4 class="title-out-of-stock"><a href="#">{{ i.product_title }}</a></h4>
+												{% else %}
+												<h4 class="title-price"><a href="/manage/{{ i.owner_id }}/{{ i.id }}/{{ i.slug }}">{{ i.product_title }}</a></h4>
+												{% endif %}
+
+
+												<span class="gender text-uppercase">{{ subcat }}</span>
+												<!-- <span class="gender">Suits - Blazers</span> -->
+											</div>    
+											<div class="product-price">
+												{% if i.rent == '1' and i.sell == '1' %}
+												<span class="title-price">Rs. {{ i.price }}/day</span>
+												<span class="title-price">Rs. {{ i.sellprice }}/-</span>
+												{% elif i.rent == '1' and i.sell == '0' %}
+												<span class="title-price">Rs. {{ i.price }}/day</span>
+												{% elif i.rent == '0' and i.sell == '1' %}
+												<span class="title-price">Rs. {{ i.sellprice }}/-</span>
+												{% else %}
+												<span class="title-price">Out of Stock :(</span>
+												{% endif %}
+
+											</div>
+										</div>    
+										<ul class="list-inline product-ratings">
+											<li><i class="rating-selected fa fa-star"></i></li>
+											<li><i class="rating-selected fa fa-star"></i></li>
+											<li><i class="rating-selected fa fa-star"></i></li>
+											<li><i class="rating fa fa-star"></i></li>
+											<li><i class="rating fa fa-star"></i></li>
+											<li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
+										</ul>    
+									</div>
+								</div>
+								{% if forloop.counter|divisibleby:3 %}
+							</div>
+							<div class="row illustration-v2 margin-bottom-30">
+								{% endif %}
+								{% endfor %}
+							</div>
+							{% endif %}
+
+						</div>
+					</div>
+
+					<!-- End Reviews -->                
+				</div>
+			</div>	
+			<!-- </div> -->
+		</div>
+	</div>
+
+	{% endblock content %}
+	{% block externaljs %}
+	{{ block.super }}
+	<script src="{{ STATIC_URL }}assets/plugins/sky-forms/version-2.0.1/js/jquery.validate.min.js"></script>
+	<script src="{{ STATIC_URL }}assets/plugins/master-slider/quick-start/masterslider/masterslider.min.js"></script>
+	<script src="{{ STATIC_URL }}assets/plugins/master-slider/quick-start/masterslider/jquery.easing.min.js"></script>
+	<script src="{{ STATIC_URL }}assets/js/plugins/master-slider.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#phone1').val("{{ user.phoneno1 }}");
+			$('#phone2').val("{{ user.phoneno2 }}");
+			$('#address').val("{{ user.address }}");
+			$('#email').val("{{ user.email }}");
+
+		});
+	</script>
+	{% endblock externaljs %}

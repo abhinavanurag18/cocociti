@@ -1,0 +1,56 @@
+{% extends "header.html" %}
+{% block externalcss %}
+    {{ block.super }}
+    <link href="{{ STATIC_URL }}/listingforms/css/listingforms.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}/listingforms/css/bootstrap-select.css" media="all" rel="stylesheet">
+{% endblock externalcss %}
+{% block externaljs %}
+{{ block.super }}
+    <script src="{{ STATIC_URL }}/listingforms/js/bootstrap-select.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.selectpicker').selectpicker();
+        });
+    </script>
+{% endblock externaljs %}
+{% block content %}
+    <div class="container">
+        <div class="rent-buy-container">
+            <center><h1>Choose Approriate Category For Your Item</h1></center>
+            <hr />
+            <div class="row">
+            <form action="/rent-category-selected" method="POST">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                    
+                    <div class="input-group">
+                       
+                        <select class="selectpicker" name="category">
+                        {% for i in category_list %}
+                            <option value="{{ i.id }}">{{ i.name }}</option>
+                        {% endfor %}
+                            <!-- <option>Books &amp; CDs</option>
+                            <option>Electronics</option>
+                            <option>Adventure Gear</option>
+                            <option>Home|Furniture</option>
+                            <option>Misc &amp; toys</option>
+                            <option>Party Stuff|Birthdays|Events</option>
+                            <option>Rent-a-dress|Fashion|Party|Dance|Weddings|Functions</option>
+                            <option>Tools &amp; Machines</option>
+                            <option>Vehicles - Bikes|Cars|Cycles</option>
+ -->                        </select>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-2">
+                    <input type="submit"  class="btn btn-primary" value="GO!!"></input>
+                </div>
+                {% csrf_token %}
+                </form>
+            </div>    
+        </div>
+        
+    </div>
+
+{% endblock content %}

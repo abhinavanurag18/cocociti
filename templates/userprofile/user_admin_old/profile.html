@@ -1,0 +1,678 @@
+{% extends "header.html" %}
+ {% block externalcss %}
+    {{ block.super }}
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/css/style.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/plugins/scrollbar/src/perfect-scrollbar.css">
+
+    <!-- CSS Page Style -->
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/css/pages/profile.css">
+
+    <!-- CSS Theme -->    
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/css/themes/blue.css" id="style_color">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/css/custom.css">
+    {% endblock externalcss %}
+{% block content %}
+
+
+<div class="wrapper">
+    <!--=== Header ===-->    
+    
+    <!--=== End Header ===-->    
+
+    <!--=== Profile ===-->
+    <div class="profile container content">
+    	<div class="row">
+            <!--Left Sidebar-->
+            <div class="col-md-3 md-margin-bottom-40">
+                <img class="img-responsive profile-img margin-bottom-20" src="" id="p_owner_dp" alt="">
+
+                <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
+                    <li class="list-group-item active">
+                        <a href="profile.html"><i class="fa fa-bar-chart-o"></i> Overall</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="profile_me.html"><i class="fa fa-user"></i> Profile</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="profile_followers.html"><i class="fa fa-group"></i> Followers</a>
+                    </li>                                        
+                    <li class="list-group-item">
+                        <a href="profile_listings.html"><i class="fa fa-cubes"></i> Listings</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="profile_reviews.html"><i class="fa fa-comments"></i> My Reviews</a>
+                    </li>                                        
+                    <li class="list-group-item">
+                        <a href="profile_timeline.html"><i class="fa fa-history"></i> Timeline</a>
+                    </li>                                       
+                    <li class="list-group-item">
+                        <a href="profile_settings.html"><i class="fa fa-cog"></i> Settings</a>
+                    </li> 
+                </ul>   
+
+                
+            </div>
+            <!--End Left Sidebar-->
+            
+            <div class="col-md-9">
+                <!--Profile Body-->
+                <div class="profile-body">
+                    <!--Service Block v3-->
+                    <div class="row margin-bottom-10">
+                        <div class="col-sm-6 sm-margin-bottom-20">
+                            <div class="service-block-v3 servive-block-u">
+                                <i class="icon-users"></i>
+                                <span class="service-heading">Overall Visits</span>
+                                <span class="counter">52,147</span>
+                                
+                                <div class="clearfix margin-bottom-10"></div>
+                                
+                                <div class="row margin-bottom-20">
+                                    <div class="col-xs-6 service-in">
+                                        <small>Last Week</small>
+                                        <h4 class="counter">1,385</h4>
+                                    </div>
+                                    <div class="col-xs-6 text-right service-in">
+                                        <small>Last Month</small>
+                                        <h4 class="counter">6,048</h4>
+                                    </div>
+                                </div>
+                                <div class="statistics">
+                                <h3 class="heading-xs">Statistics in Progress Bar <span class="pull-right">67%</span></h3>
+                                    <div class="progress progress-u progress-xxs">
+                                        <div style="width: 67%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="67" role="progressbar" class="progress-bar progress-bar-light">
+                                        </div>
+                                    </div>
+                                    <small>11% less <strong>than last month</strong></small>
+                                </div>            
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-6">
+                            <div class="service-block-v3 servive-block-blue">
+                                <i class="icon-screen-desktop"></i>
+                                <span class="service-heading">Overall Page Views</span>
+                                <span class="counter">324,056</span>
+                                
+                                <div class="clearfix margin-bottom-10"></div>
+                                
+                                <div class="row margin-bottom-20">
+                                    <div class="col-xs-6 service-in">
+                                        <small>Last Week</small>
+                                        <h4 class="counter">26,904</h4>
+                                    </div>
+                                    <div class="col-xs-6 text-right service-in">
+                                        <small>Last Month</small>
+                                        <h4 class="counter">124,766</h4>
+                                    </div>
+                                </div>
+                                <div class="statistics">
+                                <h3 class="heading-xs">Statistics in Progress Bar <span class="pull-right">89%</span></h3>
+                                    <div class="progress progress-u progress-xxs">
+                                        <div style="width: 89%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="89" role="progressbar" class="progress-bar progress-bar-light">
+                                        </div>
+                                    </div>
+                                    <small>15% higher <strong>than last month</strong></small>
+                                </div>            
+                            </div>
+                        </div>
+                    </div><!--/end row-->
+                    <!--End Service Block v3-->
+
+                    <hr>
+
+                    <!--Table Search v1-->
+                    <div class="table-search-v1 margin-bottom-20">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th class="hidden-sm">Description</th>
+                                        <th>Headquarters</th>
+                                        <th>Progress</th>
+                                        <th width="100">Status</th>
+                                        <th>Contacts</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="#">HP Enterprise Service</a>
+                                        </td>
+                                        <td class="td-width">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor arcu.</td>
+                                        <td>
+                                            <div class="m-marker">
+                                                <a href="#"><i class="color-green fa fa-map-marker"></i></a>
+                                                <a href="#" class="display-b">USA</a>
+                                                <a href="#">Palo Alto</a>
+                                            </div>    
+                                        </td>
+                                        <td>
+                                            <div class="progress progress-u progress-xxs">
+                                                <div class="progress-bar progress-bar-u" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="width: 88%">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><button class="btn-u btn-u-red btn-block btn-u-xs"><i class="fa fa-sort-amount-desc margin-right-5"></i> Deep</button></td>
+                                        <td>
+                                            <span>1(123) 456</span>
+                                            <span><a href="#">info@example.com</a></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#">Samsung Electronics</a>
+                                        </td>
+                                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor arcu.</td>
+                                        <td>
+                                            <div class="m-marker">
+                                                <a href="#"><i class="color-green fa fa-map-marker"></i></a>
+                                                <a href="#" class="display-b">South Korea</a>
+                                                <a href="#">Suwon</a>
+                                            </div>
+                                        </td>    
+                                        <td>
+                                            <div class="progress progress-u progress-xxs">
+                                                <div class="progress-bar progress-bar-u" role="progressbar" aria-valuenow="76" aria-valuemin="0" aria-valuemax="100" style="width: 76%">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><button class="btn-u btn-block btn-u-dark btn-u-xs"><i class="icon-graph margin-right-5"></i> High</button></td>
+                                        <td>
+                                            <span>1(123) 456</span>
+                                            <span><a href="#">info@example.com</a></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#">LG</a>
+                                        </td>
+                                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor arcu.</td>
+                                        <td>
+                                            <div class="m-marker">
+                                                <a href="#"><i class="color-green fa fa-map-marker"></i></a>
+                                                <a href="#" class="display-b">South Korea</a>
+                                                <a href="#">Seoul</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="progress progress-u progress-xxs">
+                                                <div class="progress-bar progress-bar-u" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><button class="btn-u btn-block btn-u-aqua btn-u-xs"><i class="fa fa-level-down margin-right-5"></i> Low</button></td>
+                                        <td>
+                                            <span>1(123) 456</span>
+                                            <span><a href="#">info@example.com</a></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#">Sony Corporation</a>
+                                        </td>
+                                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor arcu.</td>
+                                        <td>
+                                            <div class="m-marker">
+                                                <a href="#"><i class="color-green fa fa-map-marker"></i></a>
+                                                <a href="#" class="display-b">Japan</a>
+                                                <a href="#">Tokyo</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="progress progress-u progress-xxs">
+                                                <div class="progress-bar progress-bar-u" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100" style="width: 92%">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><button class="btn-u btn-block btn-u-yellow btn-u-xs"><i class="fa fa-arrows-v margin-right-5"></i> Middle</button></td>
+                                        <td>
+                                            <span>1(123) 456</span>
+                                            <span><a href="#">info@example.com</a></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#">Lenovo Group</a>
+                                        </td>
+                                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor arcu.</td>
+                                        <td>
+                                            <div class="m-marker">
+                                                <a href="#"><i class="color-green fa fa-map-marker"></i></a>
+                                                <a href="#" class="display-b">Chinese</a>
+                                                <a href="#">Beijing</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="progress progress-u progress-xxs">
+                                                <div class="progress-bar progress-bar-u" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><button class="btn-u btn-block btn-u-green btn-u-xs"><i class="fa fa-level-up margin-right-5"></i> High</button></td>
+                                        <td>
+                                            <span>1(123) 456</span>
+                                            <span><a href="#">info@example.com</a></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#">Acer</a>
+                                        </td>
+                                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor arcu.</td>
+                                        <td>
+                                            <div class="m-marker">
+                                                <a href="#"><i class="color-green fa fa-map-marker"></i></a>
+                                                <a href="#" class="display-b">Taiwan</a>
+                                                <a href="#">Taipei</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="progress progress-u progress-xxs">
+                                                <div class="progress-bar progress-bar-u" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><button class="btn-u btn-block btn-u-blue btn-u-xs"><i class="icon-graph margin-right-5"></i> Stabile</button></td>
+                                        <td>
+                                            <span>1(123) 456</span>
+                                            <span><a href="#">info@example.com</a></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>    
+                    </div>
+                    <!--End Table Search v1-->
+
+                   
+                    <hr>
+                    
+                    <!--Profile Blog-->
+                    <div class="panel panel-profile">
+                        <div class="panel-heading overflow-h">
+                            <h2 class="panel-title heading-sm pull-left"><i class="fa fa-tasks"></i>Contacts</h2>
+                            <a href="profile_users.html" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs pull-right">View All</a>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="profile-blog blog-border">
+                                        <img class="rounded-x" src="{{STATIC_URL}}assets/img/testimonials/img1.jpg" alt="">
+                                        <div class="name-location">
+                                            <strong>Mikel Andrews</strong>
+                                            <span><i class="fa fa-map-marker"></i><a href="#">California,</a> <a href="#">US</a></span>
+                                        </div>
+                                        <div class="clearfix margin-bottom-20"></div>    
+                                        <p>Donec non dignissim eros. Mauris faucibus turpis volutpat sagittis rhoncus. Pellentesque et rhoncus sapien, sed ullamcorper justo.</p>
+                                        <hr>
+                                        <ul class="list-inline share-list">
+                                            <li><i class="fa fa-bell"></i><a href="#">12 Notifications</a></li>
+                                            <li><i class="fa fa-group"></i><a href="#">54 Followers</a></li>
+                                            <li><i class="fa fa-twitter"></i><a href="#">Retweet</a></li>
+                                        </ul>
+                                    </div>
+                                </div>        
+
+                                <div class="col-sm-6">
+                                    <div class="profile-blog blog-border">
+                                        <img class="rounded-x" src="{{STATIC_URL}}assets/img/testimonials/img4.jpg" alt="">
+                                        <div class="name-location">
+                                            <strong>Natasha Kolnikova</strong>
+                                            <span><i class="fa fa-map-marker"></i><a href="#">Moscow,</a> <a href="#">Russia</a></span>
+                                        </div>
+                                        <div class="clearfix margin-bottom-20"></div>    
+                                        <p>Donec non dignissim eros. Mauris faucibus turpis volutpat sagittis rhoncus. Pellentesque et rhoncus sapien, sed ullamcorper justo.</p>
+                                        <hr>
+                                        <ul class="list-inline share-list">
+                                            <li><i class="fa fa-bell"></i><a href="#">37 Notifications</a></li>
+                                            <li><i class="fa fa-group"></i><a href="#">46 Followers</a></li>
+                                            <li><i class="fa fa-twitter"></i><a href="#">Retweet</a></li>
+                                        </ul>
+                                    </div> 
+                                </div>    
+                            </div>
+                        </div>        
+                    </div><!--/end row-->   
+                    <!--End Profile Blog-->
+
+                    <hr>
+
+                    
+                    
+                    
+                    <!--Table Search v2-->
+                    <div class="table-search-v2 margin-bottom-20">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>User Image</th>
+                                        <th class="hidden-sm">About</th>
+                                        <th>Status</th>
+                                        <th>Contacts</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img class="rounded-x" src="{{STATIC_URL}}assets/img/testimonials/img1.jpg" alt="">
+                                        </td>
+                                        <td class="td-width">
+                                            <h3><a href="#">Sed nec elit arcu</a></h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo lacus. Fusce non malesuada ante. Donec vel arcu.</p>
+                                            <small class="hex">Joined February 28, 2014</small>
+                                        </td>
+                                        <td>
+                                            <span class="label label-success">Success</span>
+                                        </td>
+                                        <td>
+                                            <ul class="list-inline s-icons">
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Facebook" href="#">
+                                                        <i class="fa fa-facebook"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Twitter" href="#">
+                                                        <i class="fa fa-twitter"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Dropbox" href="#">
+                                                    <i class="fa fa-dropbox"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Linkedin" href="#">
+                                                        <i class="fa fa-linkedin"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <span><a href="#">info@example.com</a></span>
+                                            <span><a href="#">www.htmlstream.com</a></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img class="rounded-x" src="{{STATIC_URL}}assets/img/testimonials/img2.jpg" alt="">
+                                        </td>
+                                        <td>
+                                            <h3><a href="#">Donec at aliquam est, a mattis mauris</a></h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo lacus. Fusce non malesuada ante. Donec vel arcu.</p>
+                                            <small class="hex">Joined March 2, 2014</small>
+                                        </td>
+                                        <td>
+                                            <span class="label label-info"> Pending</span>
+                                        </td>
+                                        <td>
+                                            <ul class="list-inline s-icons">
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Facebook" href="#">
+                                                        <i class="fa fa-facebook"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Twitter" href="#">
+                                                        <i class="fa fa-twitter"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Dropbox" href="#">
+                                                    <i class="fa fa-dropbox"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Linkedin" href="#">
+                                                        <i class="fa fa-linkedin"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <span><a href="#">info@example.com</a></span>
+                                            <span><a href="#">www.htmlstream.com</a></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img class="rounded-x" src="{{STATIC_URL}}assets/img/testimonials/img3.jpg" alt="">
+                                        </td>
+                                        <td>
+                                            <h3><a href="#">Pellentesque semper tempus vehicula</a></h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo lacus. Fusce non malesuada ante. Donec vel arcu.</p>
+                                            <small class="hex">Joined March 3, 2014</small>
+                                        </td>
+                                        <td>
+                                            <span class="label label-warning">Expiring</span>
+                                        </td>
+                                        <td>
+                                            <ul class="list-inline s-icons">
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Facebook" href="#">
+                                                        <i class="fa fa-facebook"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Twitter" href="#">
+                                                        <i class="fa fa-twitter"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Dropbox" href="#">
+                                                    <i class="fa fa-dropbox"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Linkedin" href="#">
+                                                        <i class="fa fa-linkedin"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <span><a href="#">info@example.com</a></span>
+                                            <span><a href="#">www.htmlstream.com</a></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img class="rounded-x" src="{{STATIC_URL}}assets/img/testimonials/img4.jpg" alt="">
+                                        </td>
+                                        <td>
+                                            <h3><a href="#">Alesuada fames ac turpis egestas</a></h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo lacus. Fusce non malesuada ante. Donec vel arcu.</p>
+                                            <small class="hex">Joined March 4, 2014</small>
+                                        </td>
+                                        <td>
+                                            <span class="label label-danger">Error!</span>
+                                        </td>
+                                        <td>
+                                            <ul class="list-inline s-icons">
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Facebook" href="#">
+                                                        <i class="fa fa-facebook"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Twitter" href="#">
+                                                        <i class="fa fa-twitter"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Dropbox" href="#">
+                                                    <i class="fa fa-dropbox"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Linkedin" href="#">
+                                                        <i class="fa fa-linkedin"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <span><a href="#">info@example.com</a></span>
+                                            <span><a href="#">www.htmlstream.com</a></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>    
+                    </div>
+                    <!--End Table Search v2-->
+                </div>
+                <!--End Profile Body-->
+            </div>
+        </div><!--/end row-->
+    </div><!--/container-->    
+    <!--=== End Profile ===-->
+
+    <!--=== Footer ===-->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 md-margin-bottom-40">
+                    <!-- About -->
+                    <div class="headline"><h2>About</h2></div>  
+                    <p class="margin-bottom-25 md-margin-bottom-40">Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals.</p>    
+                    <!-- End About -->
+
+                    <!-- Monthly Newsletter -->
+                    <div class="headline"><h2>Monthly Newsletter</h2></div> 
+                    <p>Subscribe to our newsletter and stay up to date with the latest news and deals!</p>
+                    <form class="footer-subsribe">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Email Address">                            
+                            <span class="input-group-btn">
+                                <button class="btn-u" type="button">Subscribe</button>
+                            </span>
+                        </div>                  
+                    </form>                         
+                    <!-- End Monthly Newsletter -->
+                </div><!--/col-md-4-->  
+                
+                <div class="col-md-4 md-margin-bottom-40">
+                    <!-- Recent Blogs -->
+                    <div class="posts">
+                        <div class="headline"><h2>Recent Blog Entries</h2></div>
+                        <dl class="dl-horizontal">
+                            <dt><a href="#"><img src="{{STATIC_URL}}assets/img/sliders/elastislide/6.jpg" alt="" /></a></dt>
+                            <dd>
+                                <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p> 
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="{{STATIC_URL}}assets/img/sliders/elastislide/10.jpg" alt="" /></a></dt>
+                            <dd>
+                                <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p> 
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="{{STATIC_URL}}assets/img/sliders/elastislide/11.jpg" alt="" /></a></dt>
+                            <dd>
+                                <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p> 
+                            </dd>
+                        </dl>
+                    </div>
+                    <!-- End Recent Blogs -->                    
+                </div><!--/col-md-4-->
+
+                <div class="col-md-4">
+                    <!-- Contact Us -->
+                    <div class="headline"><h2>Contact Us</h2></div> 
+                    <address class="md-margin-bottom-40">
+                        25, Lorem Lis Street, Orange <br />
+                        California, US <br />
+                        Phone: 800 123 3456 <br />
+                        Fax: 800 123 3456 <br />
+                        Email: <a href="mailto:info@anybiz.com">info@anybiz.com</a>
+                    </address>
+                    <!-- End Contact Us -->
+
+                    <!-- Social Links -->
+                    <div class="headline"><h2>Stay Connected</h2></div> 
+                    <ul class="social-icons">
+                        <li><a href="#" data-original-title="Feed" class="social_rss"></a></li>
+                        <li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li>
+                        <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
+                        <li><a href="#" data-original-title="Goole Plus" class="social_googleplus"></a></li>
+                        <li><a href="#" data-original-title="Pinterest" class="social_pintrest"></a></li>
+                        <li><a href="#" data-original-title="Linkedin" class="social_linkedin"></a></li>
+                        <li><a href="#" data-original-title="Vimeo" class="social_vimeo"></a></li>
+                    </ul>
+                    <!-- End Social Links -->
+                </div><!--/col-md-4-->
+            </div>
+        </div> 
+    </div><!--/footer-->
+    <!--=== End Footer ===-->
+
+    <!--=== Copyright ===-->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">                     
+                    <p>
+                        2014 &copy; Unify. ALL Rights Reserved. 
+                        <a target="_blank" href="https://twitter.com/htmlstream">Htmlstream</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                    </p>
+                </div>
+                <div class="col-md-6">  
+                    <a href="index.html">
+                        <img class="pull-right" id="logo-footer" src="{{STATIC_URL}}assets/img/logo2-default.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </div> 
+    </div><!--/copyright--> 
+    <!--=== End Copyright ===-->
+</div><!--/wrapper-->
+{% endblock content %}
+{% block externaljs %}
+{{ block.super }}
+<!-- JS Global Compulsory -->           
+<script type="text/javascript" src="{{STATIC_URL}}assets/plugins/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
+<!-- JS Implementing Plugins -->
+<script type="text/javascript" src="{{STATIC_URL}}assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}assets/plugins/counter/waypoints.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}assets/plugins/counter/jquery.counterup.min.js"></script> 
+<!-- Datepicker Form -->
+<script src="{{STATIC_URL}}assets/plugins/sky-forms/version-2.0.1/js/jquery-ui.min.js"></script>
+<!-- Scrollbar -->
+<script src="{{STATIC_URL}}assets/plugins/scrollbar/src/jquery.mousewheel.js"></script>
+<script src="{{STATIC_URL}}assets/plugins/scrollbar/src/perfect-scrollbar.js"></script>
+<!-- JS Page Level -->           
+<script type="text/javascript" src="{{STATIC_URL}}listing-assets/js/app.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}assets/js/plugins/datepicker.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        App.init();
+        App.initCounter();
+        Datepicker.initDatepicker();
+    });
+</script>
+<script>
+    jQuery(document).ready(function ($) {
+        "use strict";
+        $('.contentHolder').perfectScrollbar();
+    });
+</script>
+
+{% endblock externaljs %}
+<!--[if lt IE 9]>
+    <script src="{{STATIC_URL}}assets/plugins/respond.js"></script>
+    <script src="{{STATIC_URL}}assets/plugins/html5shiv.js"></script>
+<![endif]-->
+
+</body>
+</html>	

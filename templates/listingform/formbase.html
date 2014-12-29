@@ -1,0 +1,305 @@
+    {% extends "header.html" %}
+    {% block externalcss %}
+    {{ block.super }}
+    <link href="{{ STATIC_URL }}/listingforms/css/listingforms.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}/listingforms/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="{{ STATIC_URL }}/listingforms/css/bootstrap-select.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="{{ STATIC_URL }}/listingforms/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}assets/css/pages/profile.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}assets/plugins/scrollbar/src/perfect-scrollbar.css">
+    {% endblock externalcss %}
+    {% block externaljs %}
+    {{ block.super }}
+    <script src="{{ STATIC_URL }}/listingforms/js/fileinput.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}/listingforms/js/bootstrap-select.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}/listingforms/js/star-rating.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.selectpicker').selectpicker();
+            $("#input-id").rating();
+
+            $('#rent-btn').click(function(){
+                location.href="rent/selectcategory.html";
+            });
+            $('#sell-btn').click(function(){
+                location.href="sell/selectcategory.html";
+            });
+        });
+    </script>
+    {% endblock externaljs %}
+{% block content %}
+<div class="profile">
+    <div class="container content">
+        <!-- <div class="rent-buy-container">
+            <center><h1>List Your Item For Rent OR Sell</h1></center>
+            <hr />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-3">
+                    <button class="btn-u btn-u-blue center-block" type="button">Used Stuff</button>
+                </div>
+                <div class="col-md-3 tile-rent-buy btn btn-primary" id="rent-btn">
+                    <h1>Used Stuff</h1>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-3 tile-rent-buy btn btn-primary" id="sell-btn">
+                    <h1>New Stuff</h1>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn-u btn-u-blue center-block btn-lg" type="button">New Stuff</button>
+                </div>
+                <div class="col-md-2"></div>
+            </div>    
+        </div> -->
+        <div class="profile-body margin-bottom-20">
+            <div class="tab-v1">
+                <ul class="nav nav-justified nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#basic">Basic Information</a></li>
+                    <li><a data-toggle="tab" href="#additional">Additional Information</a></li>
+                    <li><a data-toggle="tab" href="#pics">Upload Pictures</a></li>
+                    <li><a data-toggle="tab" href="#publish">Publish Your Listing</a></li>
+                </ul>          
+                <div class="tab-content">
+                    <!-- <form action="books-product-listing-submit" method="post"> -->
+                        <div id="basic" class="profile-edit tab-pane fade in active">
+                        	<div class="sky-form" id="sky-form4">
+                        		<h2 class="heading-md">Provide us with the basic information of the product</h2>
+                            </br>
+                            	<form class="sky-form" id="sky-form" action="">
+                                <dl class="dl-horizontal">
+                                    <dt>Product Title</dt>
+                                    <dd>
+                                        <section>
+                                            <label class="input">
+                                                <i class="icon-append fa fa-user"></i>
+                                                <input type="text" placeholder="Product Title" name="product_title">
+                                                <b class="tooltip tooltip-bottom-right">Displayed as the product name everywhere on the website</b>
+                                            </label>
+                                        </section>
+                                    </dd>
+                                    <dt>Select category</dt>
+                                    <dd>
+                                        <section>
+                                            <!-- <label class="input">
+                                                <i class="icon-append fa fa-envelope"></i>
+                                                <input type="email" placeholder="Email address" name="email">
+                                                <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                                            </label> -->
+                                            
+                                                <label class="select">
+                                                    <select name="subcategory">
+                                                        <!-- <option disabled="" selected="" value="0">Month</option>
+                                                        <option value="1">January</option>
+                                                        <option value="1">February</option>
+                                                        <option value="3">March</option>
+                                                        <option value="4">April</option>
+                                                        <option value="5">May</option>
+                                                        <option value="6">June</option>
+                                                        <option value="7">July</option>
+                                                        <option value="8">August</option>
+                                                        <option value="9">September</option>
+                                                        <option value="10">October</option>
+                                                        <option value="11">November</option>
+                                                        <option value="12">December</option> -->
+                                                        {% for i in sub_category %}
+                                                            <option value="{{ i.id }}">{{ i.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <i></i>
+                                                </label>
+                                            
+                                        </section>
+                                    </dd>
+                                    <dt>Product Details</dt>
+                                    <dd>
+                                        <section>
+                                            <label class="textarea">
+                                                <i class="icon-append fa fa-lock"></i>
+                                                <textarea name="productdetail" id="InputMessage" rows="3" required></textarea>
+                                                <b class="tooltip tooltip-bottom-right">Give the product details to help the prospective customers to buy this product</b>
+                                            </label>
+                                        </section>
+                                    </dd>
+                                    <dt>Buying Price</dt>
+                                    <dd>
+                                        <section>
+                                            <label class="input">
+                                                <i class="icon-append fa fa-user"></i>
+                                                <input type="text" placeholder="Buying Price of the Product" name="price">
+                                                <b class="tooltip tooltip-bottom-right">This will help customers to believe on and your product</b>
+                                            </label>
+                                        </section>
+                                    </dd>
+                                    <dt>Pickup Location</dt>
+                                    <dd>
+                                        <section>
+                                            <label class="textarea">
+                                                <i class="icon-append fa fa-lock"></i>
+                                                <textarea name="pickuplocation" id="InputMessage" rows="3" required></textarea>
+                                                <b class="tooltip tooltip-bottom-right">Give us the location from where we have to pick uo the product</b>
+                                            </label>
+                                        </section>
+                                    </dd>
+                                    <dt>Pincode</dt>
+                                    <dd>
+                                        <section>
+                                            <label class="input">
+                                                <i class="icon-append fa fa-lock"></i>
+                                                <input type="text" placeholder="Enter Pincode" name="pincode">
+                                                <b class="tooltip tooltip-bottom-right">Enter the pincode of the pickup location</b>
+                                            </label>
+                                        </section>
+                                    </dd>    
+                                </dl>
+                                <!-- <label class="toggle toggle-change"><input type="checkbox" checked="" name="checkbox-toggle-1"><i></i>Remember password</label>
+                                </br>
+                                <section>
+                                    <label class="checkbox"><input type="checkbox" id="terms" name="terms"><i></i><a href="#">I agree with the Terms and Conditions</a></label>
+                                </section> -->
+                                <!-- <button type="button" class="btn-u btn-u-default">Cancel</button> -->
+                                <a href="#additional" class="btn-u" type="button">Save Changes and Continue</a>
+                           		</form>
+                        	</div>
+                            
+                        </div>
+
+                        <div id="additional" class="profile-edit tab-pane fade">
+                        	<div  class="sky-form" id="sky-form4">
+                        		<h2 class="heading-md">We need some more information about the product.</h2>
+                            <!-- <p>Below are the notifications you may manage.</p> -->
+                            </br>
+                            <form class="sky-form" id="sky-form" action="">
+                                <label class="toggle"><input type="checkbox" checked="" name="checkbox-toggle-1"><i></i>Product available on rent.</label>
+                                <hr>
+                                <label class="toggle"><input type="checkbox" checked="" name="checkbox-toggle-1"><i></i>Product available on sale.</label>
+                                <hr>
+                                <label class="toggle"><input type="checkbox" checked="" name="checkbox-toggle-1"><i></i>I can arrange pick-up and delivery.</label>
+                                <hr>
+                                <label class="toggle"><input type="checkbox" checked="" name="checkbox-toggle-1"><i></i>Product is under warranty.</label>
+                                <hr>
+                                <h2>Product Availability</h2>
+                                <label class="toggle"><input type="checkbox" checked="" name="checkbox-toggle-1"><i></i>I will set the product available everytime its available</label>
+                                <p>If not checked, Product will be set to available anytime.</p>
+                                <hr>
+                                <dt>Any Security Deposits</dt>
+                                <dd>
+                                    <section>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-user"></i>
+                                            <input type="text" placeholder="Any security deposits" name="security_deposit">
+                                            <b class="tooltip tooltip-bottom-right">This will help customers to believe on and your product</b>
+                                        </label>
+                                    </section>
+                                </dd>
+                                <dt>Any Explicit Terms and Conditions</dt>
+                                <dd>
+                                    <section>
+                                        <label class="textarea">
+                                            <i class="icon-append fa fa-lock"></i>
+                                            <textarea name="terms_conditions" id="InputMessage" rows="3" required></textarea>
+                                            <b class="tooltip tooltip-bottom-right">Give us the location from where we have to pick uo the product</b>
+                                        </label>
+                                    </section>
+                                </dd>    
+                                
+                                <a href="#pics" class="btn-u">Save Changes and Continue.</a>
+                            </form> 
+                        	</div>
+                            
+                            
+                        </div>
+
+                        <div id="pics" class="profile-edit tab-pane fade">
+                        	
+                        		<h2 class="heading-md">Upload Pictures of the product</h2>
+                            <!-- <p>Below are the payment options for your account.</p> -->
+                            </br>
+                            <form class="sky-form" id="sky-form" action="">
+                                <!--Checkout-Form-->
+                                <!-- <section>
+                                    <div class="inline-group">
+                                        <label class="radio"><input type="radio" checked="" name="radio-inline"><i class="rounded-x"></i>Visa</label>
+                                        <label class="radio"><input type="radio" name="radio-inline"><i class="rounded-x"></i>MasterCard</label>
+                                        <label class="radio"><input type="radio" name="radio-inline"><i class="rounded-x"></i>PayPal</label>
+                                    </div>
+                                </section>                  
+
+                                <section>
+                                    <label class="input">
+                                        <input type="text" name="name" placeholder="Name on card">
+                                    </label>
+                                </section>
+                                
+                                <div class="row">
+                                    <section class="col col-10">
+                                        <label class="input">
+                                            <input type="text" name="card" id="card" placeholder="Card number">
+                                        </label>
+                                    </section>
+                                    <section class="col col-2">
+                                        <label class="input">
+                                            <input type="text" name="cvv" id="cvv" placeholder="CVV2">
+                                        </label>
+                                    </section>
+                                </div>                                        
+                                
+                                <div class="row">
+                                    <label class="label col col-4">Expiration date</label>
+                                    <section class="col col-5">
+                                        <label class="select">
+                                            <select name="month">
+                                                <option disabled="" selected="" value="0">Month</option>
+                                                <option value="1">January</option>
+                                                <option value="1">February</option>
+                                                <option value="3">March</option>
+                                                <option value="4">April</option>
+                                                <option value="5">May</option>
+                                                <option value="6">June</option>
+                                                <option value="7">July</option>
+                                                <option value="8">August</option>
+                                                <option value="9">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
+                                            <i></i>
+                                        </label>
+                                    </section>
+                                    <section class="col col-3">
+                                        <label class="input">
+                                            <input type="text" placeholder="Year" id="year" name="year">
+                                        </label>
+                                    </section>
+                                </div>
+                                <button type="button" class="btn-u btn-u-default">Cancel</button>
+                                <button class="btn-u" type="submit">Save Changes</button> -->
+                                <!--End Checkout-Form-->
+
+                                <a href="#publish" class="btn-u">Save Changes and Continue.</a>
+                            </form>    
+                        	<!-- </div> -->
+                            
+                        </div>
+
+                        <div id="publish" class="profile-edit tab-pane fade">
+                        	
+                        		<h2 class="heading-md">Check your details once again to confirm and click on publish.</h2>
+                            <!-- <p>Below are the name and email addresses on file for your account.</p> -->
+                            </br>
+                            	<form class="sky-form" id="sky-form4" action="">
+                            <!-- <button type="button" class="btn-u btn-u-default">Cancel</button> -->
+                            <button type="submit" class="btn-u">Save and Publish Your Listing.</button>
+                        	</form>
+                                                       
+                        </div>
+                    <!-- </form> -->
+                </div>
+            </div>    
+        </div>
+    </div>
+</div>
+    
+{% endblock content %}
+    
+

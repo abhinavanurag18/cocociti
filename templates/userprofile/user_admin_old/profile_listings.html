@@ -1,0 +1,270 @@
+{% extends "header.html" %}
+ {% block externalcss %}
+    {{ block.super }}
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/css/style.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/plugins/scrollbar/src/perfect-scrollbar.css">
+
+    <!-- CSS Page Style -->
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/css/pages/profile.css">
+
+    <!-- CSS Theme -->    
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/css/themes/blue.css" id="style_color">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/css/custom.css">
+    {% endblock externalcss %}
+{% block content %}
+
+
+<div class="wrapper">
+    <!--=== Header ===-->    
+    
+    <!--=== End Header ===-->    
+
+    <!--=== Profile ===-->
+    <div class="profile container content">
+        <div class="row">
+            <!--Left Sidebar-->
+            <div class="col-md-3 md-margin-bottom-40">
+                <img class="img-responsive profile-img margin-bottom-20" id="p_owner_dp" src="" alt="">
+
+                <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
+                    <li class="list-group-item active">
+                        <a href="profile.html"><i class="fa fa-bar-chart-o"></i> Overall</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="profile_me.html"><i class="fa fa-user"></i> Profile</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="profile_followers.html"><i class="fa fa-group"></i> Followers</a>
+                    </li>                                        
+                    <li class="list-group-item">
+                        <a href="profile_listings.html"><i class="fa fa-cubes"></i> Listings</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="profile_reviews.html"><i class="fa fa-comments"></i> My Reviews</a>
+                    </li>                                        
+                    <li class="list-group-item">
+                        <a href="profile_timeline.html"><i class="fa fa-history"></i> Timeline</a>
+                    </li>                                       
+                    <li class="list-group-item">
+                        <a href="profile_settings.html"><i class="fa fa-cog"></i> Settings</a>
+                    </li> 
+                </ul>   
+
+                
+            </div>
+            <!--End Left Sidebar-->
+            
+            <div class="col-md-9">
+                <!--Profile Body-->
+                <div class="profile-body">
+                        <div class="profile-bio">
+                            <div class="row">
+                                <!-- <div class="col-md-5">
+                                    <img class="img-responsive md-margin-bottom-10" src="{{STATIC_URL}}assets/img/team/5.jpg" alt="">
+                                    <a class="btn-u btn-u-sm" href="#">Change Picture</a>
+                                </div> -->
+                                <div class="col-md-9">
+                                    <h2>{{ profile.username }}'s Coco Listings</h2>
+                                </div>
+                                <div class="col-md-3">
+                                    <h2>{{ listings|length }} Listings</h2>
+                                </div>
+                            </div>    
+                        </div>
+                </div><!--End Profile Body-->
+                <div class="panel-body">
+                    
+                    <div class="row">
+                        {% for i in listings %}  
+                        <div class="col-sm-6" id='{{ i.subcat_id }}'>
+                            <div class="easy-block-v1" data-scroll-reveal>
+                                <div class="easy-block-v1-badge rgba-default">Rs.{{ i.price }}</div>                
+                                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                    
+                                    <div class="carousel-inner">
+                                    
+                                        <div class="item active">
+                                            <img alt="" src="{{ MEDIA_URL }}{{ i.product_pic }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="overflow-h">
+                                    <h3>{{ i.product_title }}</h3>
+                                    <!-- <div class="star-vote pull-right">
+                                        <ul class="list-inline">
+                                            <li><i class="color-green fa fa-star"></i></li>
+                                            <li><i class="color-green fa fa-star"></i></li>
+                                            <li><i class="color-green fa fa-star"></i></li>
+                                            <li><i class="color-green fa fa-star-half-o"></i></li>
+                                            <li><i class="color-green fa fa-star-o"></i></li>
+                                        </ul>
+                                    </div> -->
+                                </div>     
+                                <ul class="list-unstyled">
+                                    <li><span class="color-green">Position:</span> Manager / Executive</li>
+                                    <li><span class="color-green">Required:</span> 5 - years of experience</li>
+                                </ul>    
+                                <a class="btn-u btn-u-sm" href="/product-page/{{ i.owner_id }}/{{ i.slug }}">View More</a>
+                            </div>  
+                        </div>
+                        {% endfor %}
+                    </div>  
+                    
+                </div>
+            </div>
+        </div><!--/end row-->
+    </div><!--/container-->    
+    <!--=== End Profile ===-->
+
+    <!--=== Footer ===-->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 md-margin-bottom-40">
+                    <!-- About -->
+                    <div class="headline"><h2>About</h2></div>  
+                    <p class="margin-bottom-25 md-margin-bottom-40">Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals.</p>    
+                    <!-- End About -->
+
+                    <!-- Monthly Newsletter -->
+                    <div class="headline"><h2>Monthly Newsletter</h2></div> 
+                    <p>Subscribe to our newsletter and stay up to date with the latest news and deals!</p>
+                    <form class="footer-subsribe">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Email Address">                            
+                            <span class="input-group-btn">
+                                <button class="btn-u" type="button">Subscribe</button>
+                            </span>
+                        </div>                  
+                    </form>                         
+                    <!-- End Monthly Newsletter -->
+                </div><!--/col-md-4-->  
+                
+                <div class="col-md-4 md-margin-bottom-40">
+                    <!-- Recent Blogs -->
+                    <div class="posts">
+                        <div class="headline"><h2>Recent Blog Entries</h2></div>
+                        <dl class="dl-horizontal">
+                            <dt><a href="#"><img src="{{STATIC_URL}}assets/img/sliders/elastislide/6.jpg" alt="" /></a></dt>
+                            <dd>
+                                <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p> 
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="{{STATIC_URL}}assets/img/sliders/elastislide/10.jpg" alt="" /></a></dt>
+                            <dd>
+                                <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p> 
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="{{STATIC_URL}}assets/img/sliders/elastislide/11.jpg" alt="" /></a></dt>
+                            <dd>
+                                <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p> 
+                            </dd>
+                        </dl>
+                    </div>
+                    <!-- End Recent Blogs -->                    
+                </div><!--/col-md-4-->
+
+                <div class="col-md-4">
+                    <!-- Contact Us -->
+                    <div class="headline"><h2>Contact Us</h2></div> 
+                    <address class="md-margin-bottom-40">
+                        25, Lorem Lis Street, Orange <br />
+                        California, US <br />
+                        Phone: 800 123 3456 <br />
+                        Fax: 800 123 3456 <br />
+                        Email: <a href="mailto:info@anybiz.com">info@anybiz.com</a>
+                    </address>
+                    <!-- End Contact Us -->
+
+                    <!-- Social Links -->
+                    <div class="headline"><h2>Stay Connected</h2></div> 
+                    <ul class="social-icons">
+                        <li><a href="#" data-original-title="Feed" class="social_rss"></a></li>
+                        <li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li>
+                        <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
+                        <li><a href="#" data-original-title="Goole Plus" class="social_googleplus"></a></li>
+                        <li><a href="#" data-original-title="Pinterest" class="social_pintrest"></a></li>
+                        <li><a href="#" data-original-title="Linkedin" class="social_linkedin"></a></li>
+                        <li><a href="#" data-original-title="Vimeo" class="social_vimeo"></a></li>
+                    </ul>
+                    <!-- End Social Links -->
+                </div><!--/col-md-4-->
+            </div>
+        </div> 
+    </div><!--/footer-->
+    <!--=== End Footer ===-->
+
+    <!--=== Copyright ===-->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">                     
+                    <p>
+                        2014 &copy; Unify. ALL Rights Reserved. 
+                        <a target="_blank" href="https://twitter.com/htmlstream">Htmlstream</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                    </p>
+                </div>
+                <div class="col-md-6">  
+                    <a href="index.html">
+                        <img class="pull-right" id="logo-footer" src="{{STATIC_URL}}assets/img/logo2-default.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </div> 
+    </div><!--/copyright--> 
+    <!--=== End Copyright ===-->
+</div><!--/wrapper-->
+{% endblock content %}
+{% block externaljs %}
+<!-- JS Global Compulsory -->           
+<script type="text/javascript" src="{{STATIC_URL}}assets/plugins/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
+<!-- JS Implementing Plugins -->
+<script type="text/javascript" src="{{STATIC_URL}}assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}assets/plugins/counter/waypoints.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}assets/plugins/counter/jquery.counterup.min.js"></script> 
+<!-- Datepicker Form -->
+<script src="{{STATIC_URL}}assets/plugins/sky-forms/version-2.0.1/js/jquery-ui.min.js"></script>
+<!-- Scrollbar -->
+<script src="{{STATIC_URL}}assets/plugins/scrollbar/src/jquery.mousewheel.js"></script>
+<script src="{{STATIC_URL}}assets/plugins/scrollbar/src/perfect-scrollbar.js"></script>
+<!-- JS Page Level -->           
+<script type="text/javascript" src="{{STATIC_URL}}assets/js/app.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}assets/js/plugins/datepicker.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        App.init();
+        App.initCounter();
+        Datepicker.initDatepicker();
+    });
+</script>
+<script>
+    jQuery(document).ready(function ($) {
+        "use strict";
+        $('.contentHolder').perfectScrollbar();
+    });
+</script>
+
+{% endblock externaljs %}
+<!--[if lt IE 9]>
+    <script src="{{STATIC_URL}}assets/plugins/respond.js"></script>
+    <script src="{{STATIC_URL}}assets/plugins/html5shiv.js"></script>
+<![endif]-->
+
+</body>
+</html> 
