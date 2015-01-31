@@ -58,7 +58,7 @@
                                         
                                     </div>
                                     <div class="col-md-5">
-                                        <button class="btn-u btn-u-blue center-block pull-left sale-btn">Buy</button>
+                                        <button class="btn-u btn-u-sea-green center-block pull-left sale-btn">Buy</button>
                                     </div>
                                 </div>
                                 <!-- <br /> -->
@@ -96,16 +96,21 @@
                                                             <td class="daydiff"></td>
                                                         </tr>
                                                         <tr>                                                        
+                                                            <td class="center-block">Daily Rent</td>
+                                                            <td>{{ product.price }}</td>
+                                                        </tr>
+                                                        <tr>                                                        
+                                                            <td class="center-block">Total Rent</td>
+                                                            <td class="fp">{{ product.price }}</td>
+                                                        </tr>
+                                                        <tr>                                                        
                                                             <td class="center-block">Security Deposit</td>
                                                             <td>{{ product.security_deposits }}</td>
                                                         </tr>
-                                                        <tr>                                                        
-                                                            <td class="center-block">Coco Cost</td>
-                                                            <td class="cococost">10%</td>
-                                                        </tr>
+                                                        
                                                         <tr>                                                        
                                                             <td class="center-block">You have to pay</td>
-                                                            <td class="fp">{{ product.price }}</td>
+                                                            <td class="fpt">{{ product.price }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -130,10 +135,7 @@
                                                         <td class="center-block">Cost of the Product</td>
                                                         <td>{{ product.sellprice }}</td>
                                                     </tr>
-                                                    <tr>                                                        
-                                                        <td class="center-block">Coco Cost</td>
-                                                        <td>0%</td>
-                                                    </tr>
+                                                    
                                                     <tr>                                                        
                                                         <td class="center-block">You have to pay</td>
                                                         <td>{{ product.sellprice }}</td>
@@ -283,112 +285,7 @@
                         </div>
                         <hr>
 
-                        <h3>Overview</h3>
-                        <div class="row">
-                            <!-- Overview -->
-                            <div class="col-sm-6">
-                                <div class="overview">
-                                    <i class="fa fa-user"></i>
-                                    <div class="overflow-h">
-                                        <small>Followers</small>
-                                        <small class="nofols">{{ nofol }}</small>
-                                        <div class="progress progress-u progress-xxs">
-                                            <div style="width: 92%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="92" role="progressbar" class="progress-bar progress-bar-u">
-                                            </div>
-                                        </div>
-                                    </div>    
-                                </div>
-                            </div>
-                            <!-- End Overview -->
-
-                            <!-- Overview -->
-                            <div class="col-sm-6">
-                                <div class="overview">
-                                    <i class="fa fa-share"></i>
-                                    <div class="overflow-h">
-                                        <small>VieSharews</small>
-                                        <small>749k</small>
-                                        <div class="progress progress-u progress-xxs">
-                                            <div style="width: 77%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="77" role="progressbar" class="progress-bar progress-bar-u">
-                                            </div>
-                                        </div>
-                                    </div>    
-                                </div>
-                            </div>
-                            <!-- End Overview -->
-                        </div>
-
-                        <div class="row margin-bottom-20">
-                            <!-- Overview -->
-                            <div class="col-sm-6">
-                                <div class="overview">
-                                    <i class="fa fa-eye"></i>
-                                    <div class="overflow-h">
-                                        <small>Views</small>
-                                        <small>15,7k</small>
-                                        <div class="progress progress-u progress-xxs">
-                                            <div style="width: 88%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="88" role="progressbar" class="progress-bar progress-bar-u">
-                                            </div>
-                                        </div>
-                                    </div>    
-                                </div>
-                            </div>
-                            <!-- End Overview -->
-                            
-                            <!-- Overview -->
-                            <div class="col-sm-6">
-                                <div class="overview">
-                                    <i class="fa fa-group"></i>
-                                    <div class="overflow-h">
-                                        <small>Opportunity Views</small>
-                                        <small>202,8k</small>
-                                        <div class="progress progress-u progress-xxs">
-                                            <div style="width: 76%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="76" role="progressbar" class="progress-bar progress-bar-u">
-                                            </div>
-                                        </div>
-                                    </div>    
-                                </div>
-                            </div>
-                            <!-- End Overview -->
-                        </div>
-
-                        <!-- Pie Chart Progress Bar -->    
-                            
-                        <!-- End Pie Chart Progress Bar -->
-
-                        <!-- <hr>
-
-                        <h3>What People are Saying about Company</h3>
-                        <div class="people-say margin-bottom-20">
-                            <img src="{{ STATIC_URL }}listing-assets/img/testimonials/img2.jpg" alt="">
-                            <div class="overflow-h">
-                                <span>Eva Maria Kl.</span>
-                                <small class="hex pull-right">5 - hours ago</small>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis varius hendrerit nisl id condimentum.</p>
-                            </div>    
-                        </div>
-
-                        <div class="people-say margin-bottom-20">
-                            <img src="{{ STATIC_URL }}listing-assets/img/testimonials/user.jpg" alt="">
-                            <div class="overflow-h">
-                                <span>Christian Draxler</span>
-                                <small class="hex pull-right">2 - days ago</small>
-                                <p>Vestibulum justo est, pharetra fermentum justo in, tincidunt mollis turpis. Duis imperdiet non justo euismod semper.</p>
-                            </div>    
-                        </div>
-
-                        <div class="people-say">
-                            <img src="{{ STATIC_URL }}listing-assets/img/testimonials/img3.jpg" alt="">
-                            <div class="overflow-h">
-                                <span>Alex Taylor</span>
-                                <small class="hex pull-right">3 - days ago</small>
-                                <p>A Wal-Mart cashier is responsible for effectively executing and adhering to the “Basic Beliefs” of the founder.</p>
-                            </div>    
-                        </div> -->
-
-                        <hr> 
-
-                        <a href="/profile/{{ owner.userid }}/" class="btn-u btn-block center-block"> View Profile</a>
+                        
                     </div>   
                 </div>
                 <!-- End Right Inner -->
@@ -464,8 +361,15 @@ $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
     $days.bind("contentchange", function() {
         var days = parseInt($days.html());
         var basep = parseInt($('.bp').attr('value'));
-        var fp = parseInt(basep*days + (0.1 * basep*days) + ({{ product.security_deposits }}+0));
+        var sec = parseInt({{ product.security_deposits }} + 0);
+        var fp = parseInt(basep*days + (0.15 * basep*days));
         $('.fp').html(fp);
+        if(fp > sec ){
+            $('.fpt').html(fp);
+        }
+        else {
+            $('.fpt').html(sec);
+        }
     });
     $('.rent-btn').click(function(){
         $('.sale-tag-box').css('display','none');
@@ -514,7 +418,8 @@ $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
                 success : function(data){
                     if(data['suc'] == 1){
                         alert("added to cart");
-                        $('#cartlength').html("{{ request.session.cartlength }}");
+                        $('#cartlength').html(data['cartlength']);
+                        window.location.href = "/checkout/";
                     }
                     else{
                         if(data['suc'] == 2){
@@ -548,8 +453,9 @@ $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
                 type : 'GET',
                 success : function(data){
                     if(data['suc'] == 1){
-                        $('#cartlength').html("{{ request.session.cartlength }}");
+                        $('#cartlength').html(data['cartlength']);
                         alert("added to cart");
+                        window.location.href = "/checkout/";
                         
                     }
                     else{

@@ -36,7 +36,7 @@ def rentcart(request):
 	p = GenProduct.objects.get(owner_id=ownerid,slug=product_slug)
 	product_id = p
 	status = {}
-	rc = rcart.objects.filter(cart_item_id = p)
+	rc = rcart.objects.filter(cart_item_id = p, cart_customer_id = user)
 	if len(rc) != 0:
 		status['suc'] = 2
 	else:
@@ -45,8 +45,10 @@ def rentcart(request):
 			pp.save()
 			request.session['cartlength'] = cartlength(request.session['userid'])
 			status['suc'] = 1
+			status['cartlength'] = cartlength(request.session['userid'])
 		except:
 			status['suc'] = 0
+			status['cartlength'] = cartlength(request.session['userid'])
 	
 	json = simplejson.dumps(status)
 	return HttpResponse(json, content_type='application/json')
@@ -62,7 +64,7 @@ def salecart(request):
 	p = GenProduct.objects.get(owner_id=ownerid,slug=product_slug)
 	product_id = p
 	status = {}
-	sc = scart.objects.filter(cart_item_id = product_id)
+	sc = scart.objects.filter(cart_item_id = product_id, cart_customer_id = user)
 	if len(sc) != 0:
 		status['suc'] = 2
 	else :		
@@ -71,8 +73,10 @@ def salecart(request):
 			pp.save()
 			request.session['cartlength'] = cartlength(request.session['userid'])
 			status['suc'] = 1
+			status['cartlength'] = cartlength(request.session['userid'])
 		except:
 			status['suc'] = 0
+			status['cartlength'] = cartlength(request.session['userid'])
 	
 	json = simplejson.dumps(status)
 	return HttpResponse(json, content_type='application/json')
@@ -99,9 +103,10 @@ def deleteFromRentCart(request):
 			total+=int(j.price)
 
 		status['total'] = total
-		
+		status['cartlength'] = cartlength(request.session['userid'])
 	except:
 		status['suc'] = 0
+		status['cartlength'] = cartlength(request.session['userid'])
 	request.session['cartlength'] = cartlength(request.session['userid'])
 	json = simplejson.dumps(status)
 	return HttpResponse(json,content_type = 'application/json')
@@ -129,8 +134,10 @@ def deleteFromSaleCart(request):
 			total+=int(j.price)
 
 		status['total'] = total
+		status['cartlength'] = cartlength(request.session['userid'])
 	except:
 		status['suc'] = 0
+		status['cartlength'] = cartlength(request.session['userid'])
 
 	request.session['cartlength'] = cartlength(request.session['userid'])
 	json = simplejson.dumps(status)

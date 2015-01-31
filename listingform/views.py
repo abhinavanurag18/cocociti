@@ -62,8 +62,8 @@ def product_listing_submit(request):
 	from geopy.geocoders import Nominatim
 	geolocator = Nominatim()
 	location = geolocator.geocode(pickup)
-	pickuplat = location.latitude
-	pickuplng = location.longitude
+	# pickuplat = location.latitude
+	# pickuplng = location.longitude
 
 
 	# pickuplat=request.POST['pickuplat']
@@ -78,9 +78,9 @@ def product_listing_submit(request):
 	
 	
 	request.encoding = 'koi8-r'
-	pp=GenProduct.objects.create(owner_id=request.session['userid'],product_pic=pics,cat_id=cid.cat_id_id,subcat_id=sid,product_title=pt,product_details=pd,buyingprice=bp,sellprice=sp,price=rp,pickup=pickup,pickup_lat=pickuplat,pickup_long=pickuplng,pincode=pincode,warranty=war,explicit_terms_conditions=tc,availability=avl,security_deposits=sd,logistics=log,rent=r,sell=s)
+	pp=GenProduct.objects.create(owner_id=request.session['userid'],product_pic=pics,cat_id=cid.cat_id_id,subcat_id=sid,product_title=pt,product_details=pd,buyingprice=bp,sellprice=sp,price=rp,pickup=pickup,pickup_lat=0,pickup_long=0,pincode=pincode,warranty=war,explicit_terms_conditions=tc,availability=avl,security_deposits=sd,logistics=log,rent=r,sell=s)
 	pp.save()
-	return redirect('/')
+	return redirect('/user-admin/'+request.session['userid']+'/')
 	# return render(request,"listingforms/rs.html",{'rs':cki_date})
 
 # def books_product_listing_submit(request):

@@ -147,27 +147,27 @@
                       // successful.  See statusChangeCallback() for when this call is made.
                       function testAPI() {
                         console.log('Welcome!  Fetching your information.... ');
-                        FB.api('/me', function(response) {
-                          console.log('Successful login for: ' + response.name);
-                          userid = response.id;
-                          username = response.name;
-                            if(userid == ""){
-                              alert("no userid");
-                            }
-                            else {
-                                alert("userid : " + userid);
-                              $.ajax({
-                                url : "/sessionset/",
-                                data : $.param({ userid:userid,username:username,csrfmiddlewaretoken: '{{ csrf_token }}'}),
-                                method : "POST",
-                                success : function(d){
-                                  alert(d);
-                                  // if(d == 1){
-                                  //   loginland(response);
-                                  // }
-                                }
-                              });
-                            }
+                        // FB.api('/me', function(response) {
+                        //   console.log('Successful login for: ' + response.name);
+                        //   userid = response.id;
+                        //   username = response.name;
+                        //     if(userid == ""){
+                        //       alert("no userid");
+                        //     }
+                        //     else {
+                        //         alert("userid : " + userid);
+                        //       $.ajax({
+                        //         url : "/sessionset/",
+                        //         data : $.param({ userid:userid,username:username,csrfmiddlewaretoken: '{{ csrf_token }}'}),
+                        //         method : "POST",
+                        //         success : function(d){
+                        //           alert(d);
+                        //           // if(d == 1){
+                        //           //   loginland(response);
+                        //           // }
+                        //         }
+                        //       });
+                            // }
                           // document.getElementById('status').innerHTML =
                           //   'Thanks for logging in, ' + response.name + '!';
                             // $('#fb_name').html(response.name);
@@ -175,7 +175,7 @@
                             // $('#username').val(response.name);
 
                             
-                        });
+                        // });
                         FB.api('/me/picture/?redirect=0&height=40&type=normal&width=40',function(response){
                             // $('#fb_dp').css("background-image","url("+response.data.url+")");
                             // alert(response.data.url);

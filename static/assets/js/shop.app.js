@@ -87,8 +87,8 @@ var App = function () {
 
     function handleMegaMenu() {
         $(document).on('click', '.mega-menu .dropdown-menu', function(e) {
-            e.stopPropagation()
-        })
+            e.stopPropagation();
+        });
     }
 
     function handleScrollBar() {

@@ -14,7 +14,7 @@
 
     {% block externalcss %}
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico">
 
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="{{ STATIC_URL }}assets/plugins/bootstrap/css/bootstrap.min.css">
@@ -36,6 +36,17 @@
     <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
         for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
             mixpanel.init("f4108854389bb72a3a3cad73ba956622");</script><!-- end Mixpanel -->
+
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58013246-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </head>	
 
 <body class="header-fixed">
@@ -58,7 +69,7 @@
                         <ul class="list-inline right-topbar pull-right">
                             <li><a href="#" id="hi"></a></li>
                             <!-- <li><a href="shop-ui-add-to-cart.html">Wishlist (0)</a></li> -->
-                            <li><a href="/login/" id="loginout">Login, {{ request.session.username }}</a></li>
+                            <li><a href="/login/" id="loginout">Login {{ request.session.username }}</a></li>
                             <li><i class="search fa fa-search search-button"></i></li>
                         </ul>
                     </div>
@@ -105,23 +116,30 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <div class="mega-menu-content">
+                                    <div class="mega-menu-content" style="z-index : -1;">
                                         <div class="container">
-                                            <div class="row">
-                                            {% for i in catlist %}
+                                            <div style="position : relative; z-index : 10000; overflow-y: auto; overflow-x : hidden; max-height : 340px;">
+                                                {% for i in catlist %}
+                                                {% if forloop.first %}<div class="row">{% endif %}
                                                 <div class="col-md-3 col-sm-6">
                                                 
-                                                    <h3 class="mega-menu-heading">{{ i.name }}</h3>
+                                                    <h5 class=""><b>{{ i.name }}</b></h5>
+                                                    <hr width="75%" style="margin : 0px !important;" />
                                                     <ul class="list-unstyled style-list">
                                                         {% for j in subcatlist %}
                                                         {% if j.cat_id_id == i.id %}
-                                                        <li><a href="/subcatselect/{{ j.id }}">{{ j.name }}</a></li>
+                                                        <li><a href="/subcatselect/{{ j.id }}" style="font-size : 12px;">{{ j.name }}</a></font></li>
                                                         {% endif %}
                                                         {% endfor %}
                                                     </ul>
                                                 </div>
+                                                {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+                                                {% if forloop.last %}</div>{% endif %}<!--/end row-->
                                                 {% endfor %}
-                                            </div><!--/end row-->
+                                            </div>
+                                            
+                                                
+                                            
                                         </div><!--/end container-->
                                     </div><!--/end mega menu content-->  
                                 </li>
@@ -131,18 +149,13 @@
 
                         <!-- Clothes -->
                         <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-delay="1000">
-                                Help
+                            <a href="http://cocociti.zendesk.com">
+                                FAQs
                             </a>
                            
                         </li>
                         <!-- End Clothes -->
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-delay="1000">
-                                How It Works
-                            </a>
-                           
-                        </li>
+                        
                         <!-- Main Demo -->
                         <li><a href="#" id="list" onclick="list();return false;">List Your Item</a></li>
                         <!-- Main Demo -->
@@ -165,7 +178,7 @@
                 <form action="/subscribe/" method="post">
                 {% csrf_token %}
                     <div class="input-group">
-                        <input type="text" class="form-control" name="email" placeholder="Your email..." required>
+                        <input type="email" class="form-control" name="email" placeholder="Your email..." required>
                         <span class="input-group-btn">
                             <button class="btn" type="submit"><i class="fa fa-envelope-o"></i></button>
                         </span>
@@ -187,20 +200,21 @@
                     <div class="col-md-12 md-margin-bottom-40">
                     <center>
                         <a href="index.html"><img class="footer-logo" src="{{ STATIC_URL }}default.png" alt=""></a>
-                        <p>About Unify dolor sit amet, consectetur adipiscing elit. Maecenas eget nisl id libero tincidunt sodales.</p>
+                        <p>Cocociti is your trusted peer-to-peer(P2P) rental marketplace. Product owners make money by renting things &amp; users save money by avoiding costly purchases.</p>
                         <br>
-                        <ul class="list-unstyled address-list margin-bottom-20">
-                            <li><i class="fa fa-angle-right"></i>California, US, Lorem Lis Street, Orange, 25</li>
-                            <li><i class="fa fa-angle-right"></i>Phone: 800 123 3456</li>
-                            <li><i class="fa fa-angle-right"></i>Fax: 800 123 3456</li>
-                            <li><i class="fa fa-angle-right"></i>Email: info@anybiz.co</li>
-                        </ul>
+                        <p>
+                            We commit to provide you access without ownership, superior customer experience &amp; product safety. Risk mitigation is ensured by identity verification, user history analysis, online footprints, social graphs, ratings, strict due diligence &amp; security deposits. Thanks to our awesome technology, you can rent and borrow with peace of mind.
+                        </p>
+                        <br />
+                        <p>
+                            Let's coco Bengaluru!<br />Coco Care : <b>0900 8888 522 | hello@cocociti.com</b>
+                        </p>
 
                         <ul class="list-inline shop-social">
-                            <li><a href="#"><i class="fb rounded-md fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="tw rounded-md fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="gp rounded-md fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="yt rounded-md fa fa-youtube"></i></a></li>
+                            <li><a href="http://www.facebook.com/cocociti" target="blank"><i class="fb rounded-md fa fa-facebook"></i></a></li>
+                            <li><a href="http://www.twitter.com/twitter_" target="blank"><i class="tw rounded-md fa fa-twitter"></i></a></li>
+                            <li><a href="https://plus.google.com/+Cocociti/" target="blank"><i class="gp rounded-md fa fa-google-plus"></i></a></li>
+                            <!-- <li><a href="" target="blank"><i class="yt rounded-md fa fa-youtube"></i></a></li> -->
                         </ul>
                     </center>
                         
@@ -215,8 +229,8 @@
                 <div class="row">
                     <div class="col-md-6">                     
                         <p>
-                            2014 &copy; Cocociti. ALL Rights Reserved. 
-                            | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                            2015 &copy; Cocociti. ALL Rights Reserved. 
+                            | <a href="#">Privacy</a> | <a href="#">Terms</a>
                         </p>
                     </div>
                     <div class="col-md-6">  

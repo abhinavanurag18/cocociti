@@ -421,6 +421,7 @@
                 success : function(data){
                     if(data['suc'] == 1){
                         alert("Deleted from cart");
+                        $('#cartlength').html(data['cartlength']);
                         $("#rtr"+rid).remove();
                         $("#subtotal span").html("Rs. "+data['total']);
                         $("#grosstotal span").html("Rs. "+data['total']);
@@ -442,6 +443,7 @@
                 success : function(data){
                     if(data['suc'] == 1){
                         alert("Deleted from cart");
+                        $('#cartlength').html(data['cartlength']);
                         $("#str"+sid).remove();
                         $("#subtotal span").html("Rs. "+data['total']);
                         $("#grosstotal span").html("Rs. "+data['total']);

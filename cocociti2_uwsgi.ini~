@@ -4,7 +4,7 @@
 # Django-related settings
 # the base directory (full path)
 chdir           = /root/cocociti2/
-# Djangos wsgi file
+# Django's wsgi file
 module          = cocociti2.wsgi
 # the virtualenv (full path)
 home            = /opt/virtualenv

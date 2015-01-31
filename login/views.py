@@ -59,7 +59,7 @@ def register(request):
 		o = fbuser.objects.get(userid=ownerid)
 		return render(request,'productpage/index.html',{'product':p,'owner':o,'pagehead':'Product Page',})
 	else:
-		return render(request,'landingpage/index.html')
+		return redirect("/")
 
 def sessionset(request):
 	userid = request.POST['userid']

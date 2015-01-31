@@ -906,7 +906,7 @@
 .header-v5 .mega-menu .dropdown.mega-menu-fullwidth .dropdown-menu {
     left: 0;
     right: 0;
-    overflow: hidden;
+    overflow: auto;
 }
 
 @media (min-width: 992px) {

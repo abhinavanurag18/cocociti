@@ -1,49 +1,69 @@
-    {% extends "header.html" %}
-    {% block externalcss %}
-    {{ block.super }}
-    <link href="{{ STATIC_URL }}/listingforms/css/listingforms.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}/listingforms/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ STATIC_URL }}/listingforms/css/bootstrap-select.css" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ STATIC_URL }}/listingforms/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/css/pages/profile.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/plugins/scrollbar/src/perfect-scrollbar.css">
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}listing-assets/css/typeahead.css">
-    {% endblock externalcss %}
-    {% block externaljs %}
-    {{ block.super }}
-    
-    <!-- JS Implementing Plugins -->
-    <script type="text/javascript" src="{{ STATIC_URL }}listing-assets/plugins/back-to-top.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}listing-assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}listing-assets/plugins/parallax-slider/js/modernizr.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}listing-assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
-    
-    <script type="text/javascript" src="{{ STATIC_URL }}listing-assets/js/pages/index.js"></script>
-    
+{% extends "header.html" %}
+{% block externalcss %}
+{{ block.super }}
+<link href="{{ STATIC_URL }}/listingforms/css/listingforms.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}/listingforms/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+<link href="{{ STATIC_URL }}/listingforms/css/bootstrap-select.css" media="all" rel="stylesheet" type="text/css" />
+<link href="{{ STATIC_URL }}/listingforms/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/css/pages/profile.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}listing-assets/plugins/scrollbar/src/perfect-scrollbar.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}listing-assets/css/typeahead.css">
+{% endblock externalcss %}
+{% block externaljs %}
+{{ block.super }}
 
-    <script type="text/javascript">
-      $(document).ready(function() {
+<!-- JS Implementing Plugins -->
+<script type="text/javascript" src="{{ STATIC_URL }}listing-assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}listing-assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}listing-assets/plugins/parallax-slider/js/modernizr.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}listing-assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+
+<script type="text/javascript" src="{{ STATIC_URL }}listing-assets/js/pages/index.js"></script>
+<!-- <script src="assets/js/plugins/jquery.validate.min.js"></script> -->
+<!-- <script type="text/javascript" src="assets/js/plugins/validation.js"></script> -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.47/jquery.form-validator.min.js"></script>
+<script>
+ 
+    $.validate({
+        modules : 'location, date, security, file',
+        onModulesLoaded : function() {
+            $('#country').suggestCountry();
+        }
+    });
+
+    // Restrict presentation length
+    $('#presentation').restrictLength( $('#pres-max-length') );
+ 
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
         // App.init();
-               
-      });
-    </script>
-    <script src="{{ STATIC_URL }}/listingforms/js/fileinput.js" type="text/javascript"></script>
-    <script src="{{ STATIC_URL }}/listingforms/js/bootstrap-select.js" type="text/javascript"></script>
-    <script src="{{ STATIC_URL }}/listingforms/js/star-rating.js" type="text/javascript"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}listing-assets/js/typeahead.js"></script>
+        // Validation.initValidation();
+        
+    });
+</script>
+<script src="{{ STATIC_URL }}/listingforms/js/fileinput.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}/listingforms/js/bootstrap-select.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}/listingforms/js/star-rating.js" type="text/javascript"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}listing-assets/js/typeahead.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<!-- <script type="text/javascript" src="assets/js/plugins/validation.js"></script> -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        
+        $('.selectpicker').selectpicker();
+        $("#input-id").rating();
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('.selectpicker').selectpicker();
-            $("#input-id").rating();
-
-            $('#rent-btn').click(function(){
-                location.href="rent/selectcategory.html";
-            });
-            $('#sell-btn').click(function(){
-                location.href="sell/selectcategory.html";
-            });
+        $('#rent-btn').click(function(){
+            location.href="rent/selectcategory.html";
+        });
+        $('#sell-btn').click(function(){
+            location.href="sell/selectcategory.html";
+        });
             // $('#pickupadd').blur(function(){
             //     var add = $(this).val();
             //     alert(add);
@@ -59,25 +79,25 @@
             //             alert(fadd + ' '+lat+' '+lng);
             //         }
             //     });
-                
+
 
             // });
-            var books = new Bloodhound({
-                datumTokenizer: function (datum) {
-                    return Bloodhound.tokenizers.whitespace(datum.value);
-                },
-                queryTokenizer: Bloodhound.tokenizers.whitespace,
-                remote: {
-                    url: 'https://www.googleapis.com/books/v1/volumes?q=%QUERY',
-                    filter: function (books) {
-                        return $.map(books.items, function (book) {
-                            return {
-                                value: book.volumeInfo.title
-                            };
-                        });
-                    }
-                }
+var books = new Bloodhound({
+    datumTokenizer: function (datum) {
+        return Bloodhound.tokenizers.whitespace(datum.value);
+    },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+        url: 'https://www.googleapis.com/books/v1/volumes?q=%QUERY',
+        filter: function (books) {
+            return $.map(books.items, function (book) {
+                return {
+                    value: book.volumeInfo.title
+                };
             });
+        }
+    }
+});
 
             // Initialize the Bloodhound suggestion engine
             books.initialize();
@@ -87,168 +107,271 @@
                 highlight: true
             });
             $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
-$('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
+            $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
         });
-    </script>
-    {% endblock externaljs %}
+$(function(){
+        $('#pickupadd').blur(function(){
+                var address = $('#pickupadd').val();
+                // $('.map-box').html('<iframe width="600" height="450" frameborder="0" style="border:0" id="map" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBouT7gW2ir_Lt1kQFnSzemVYY67A1CV74&q=Space+Needle,Seattle+WA">
+                //     </iframe>');
+                // $('.map-box').html('<iframe width="600" height="450" frameborder="0" style="border:0" id="map" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBouT7gW2ir_Lt1kQFnSzemVYY67A1CV74&q='+address+'"></frame>');
+                // $('#map').attr('src','https://www.google.com/maps/embed/v1/place?key=AIzaSyBouT7gW2ir_Lt1kQFnSzemVYY67A1CV74&q='+address+'');
+               mapInitialize(address);
+        });
+});
+    
+
+    function mapInitialize(address){
+        $.ajax({
+            url : 'https://maps.googleapis.com/maps/api/geocode/json?address='+address+'&key=AIzaSyBQ1U_tuTU-Dxt0D1qFrdzLQktkf-S8Zw4',
+            datatype : 'json',
+            success : function(data){
+                var formatadd = data.results[0].formatted_address;
+                $('#map').attr('src','https://www.google.com/maps/embed/v1/place?key=AIzaSyBouT7gW2ir_Lt1kQFnSzemVYY67A1CV74&q='+formatadd+'');
+                // for(var i in data.results[0].geometry.location){
+                //     alert(i);    
+                // }
+                $('#plat').val(data.results[0].geometry.location.lat);
+                $('#plng').val(data.results[0].geometry.location.lng);
+                lat = data.results[0].geometry.location.lat;
+                lon = data.results[0].geometry.location.lng;
+            },
+            error : function(error){
+                alert(error);
+            }
+        });
+    }
+
+
+
+        
+    
+    
+
+    
+
+
+
+
+ 
+// function initialize(address) {
+//     $.ajax({
+//         url : 'https://maps.googleapis.com/maps/api/geocode/json?address='+address+'&key=AIzaSyBQ1U_tuTU-Dxt0D1qFrdzLQktkf-S8Zw4',
+//         datatype : 'json',
+//         success : function(data){
+//             // var formatadd = data.results[0].formatted_address;
+//             // $('#map').attr('src','https://www.google.com/maps/embed/v1/place?key=AIzaSyBouT7gW2ir_Lt1kQFnSzemVYY67A1CV74&q='+formatadd+'');
+//             // for(var i in data.results[0].geometry.location){
+//             //     alert(i);    
+//             // }
+//             $('#plat').val(data.results[0].geometry.location.lat);
+//             $('#plng').val(data.results[0].geometry.location.lng);
+//             lat = data.results[0].geometry.location.lat;
+//             lon = data.results[0].geometry.location.lng;
+//         },
+//         error : function(error){
+//             alert(error);
+//         }
+//     });
+
+//     var mapOptions = {
+//         zoom: 16,
+//         mapTypeId: google.maps.MapTypeId.ROADMAP,
+//         streetViewControl: false,
+//         panControl: false,
+//         mapTypeControl: true,
+//         mapTypeControlOptions: {
+//             style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+//             position: google.maps.ControlPosition.BOTTOM_CENTER
+//         },
+//         zoomControl: true,
+//         zoomControlOptions: {
+//             style: google.maps.ZoomControlStyle.SMALL,
+//             position: google.maps.ControlPosition.LEFT_CENTER
+//         }
+//     };
+    
+//     map = new google.maps.Map(document.getElementById('map'), mapOptions);
+//     // var adUnitDiv = document.createElement('div');
+//     // var adsense = "ca-pub-1234";
+    
+//     // Add a Google AdSense unit
+    
+    
+    
+    
+    
+    
+//     // Determine your initial location through GPS
+//     // if (navigator.geolocation) {
+//     //     navigator.geolocation.getCurrentPosition(function(position) {
+//     //         lat = position.coords.latitude;
+//     //         lon = position.coords.longitude;
+//     //     });
+//     // }
+    
+//     var latLng = new google.maps.LatLng(lat, lon);
+//     map.setCenter(latLng);
+//     marker = new google.maps.Marker({
+//         position: latLng,
+//         title: 'Drag this pin to another location',
+//         animation: google.maps.Animation.DROP,
+//         map: map,
+//         draggable: true
+//     });
+    
+//     infoWindow = new google.maps.InfoWindow({
+//         content: "<div class='place'>Drag this pin anywhere on the Google Map to know the approximate address of that point.</div>"
+//     });
+    
+//     infoWindow.open(map, marker);
+    
+//     geocoder = new google.maps.Geocoder();
+    
+//     //Update postal address when the marker is dragged
+//     google.maps.event.addListener(marker, 'dragend', function() {
+//         geocoder.geocode({latLng: marker.getPosition()}, function(responses) {
+//             if (responses && responses.length > 0) {
+//                 infoWindow.setContent(
+//                 "<div class='place'>" + responses[0].formatted_address 
+//                 + "<br /> <small>" 
+//                 + "Latitude: " + marker.getPosition().lat() + "<br>" 
+//                 + "Longitude: " + marker.getPosition().lng() + "</small></div>"
+//                 );
+//                 infoWindow.open(map, marker);
+//             } else {
+//                 alert('Error: Google Maps could not determine the address of this location.');
+//             }
+//         });
+//         map.panTo(marker.getPosition());
+//     });
+    
+//     // Close the marker window when being dragged
+//     google.maps.event.addListener(marker, 'dragstart', function() {
+//         infoWindow.close(map, marker);
+//     });
+// }
+ 
+// google.maps.event.addDomListener(window, 'load', initialize);
+ 
+// // Search for an address on Google Maps
+// function showAddress(address) {
+//     if (geocoder) {
+//         geocoder.geocode({'address': address}, function(results, status) {
+//             if (status == google.maps.GeocoderStatus.OK) {
+                
+//                 // For accurate addresses, the type is ROOFTOP else APPROXIMATE
+//                 if (results[0].geometry.location_type == "ROOFTOP")
+//                     map.setZoom(18);
+//                 else
+//                     map.setZoom(14);
+//                 map.setCenter(results[0].geometry.location);
+//                 marker.setPosition(results[0].geometry.location);
+//                 infoWindow.open(map, marker);
+//             } else {
+//                 alert("Error: " + address + " cannot be found on Google Maps.");
+//             }
+//         });
+//     }
+// }
+
+</script>
+{% endblock externaljs %}
 {% block content %}
+
 <br />
 
 <div class="container">
     <p class="bg-info" style="padding: 5px;"><b>{{ category.desc }}</b></p>
 </div>
-
 <div class="profile">
     <div class="container content">
-        <!-- <div class="rent-buy-container">
-            <center><h1>List Your Item For Rent OR Sell</h1></center>
-            <hr />
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-3">
-                    <button class="btn-u btn-u-blue center-block" type="button">Used Stuff</button>
-                </div>
-                <div class="col-md-3 tile-rent-buy btn btn-primary" id="rent-btn">
-                    <h1>Used Stuff</h1>
-                </div>
-                <div class="col-md-2"></div>
-                <div class="col-md-3 tile-rent-buy btn btn-primary" id="sell-btn">
-                    <h1>New Stuff</h1>
-                </div>
-                <div class="col-md-3">
-                    <button class="btn-u btn-u-blue center-block btn-lg" type="button">New Stuff</button>
-                </div>
-                <div class="col-md-2"></div>
-            </div>    
-        </div> -->
         <div class="profile-body margin-bottom-20">
             <div class="tab-v1">
-                <ul class="nav nav-justified nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#basic" id="1">Basic Information</a></li>
-                    <li><a data-toggle="tab" href="#additional" id="2">Additional Information</a></li>
-                    <li><a data-toggle="tab" href="#pics" id="3">Upload Pictures</a></li>
-                    <li><a data-toggle="tab" href="#publish" id="4" >Publish Your Listing</a></li>
-                </ul>
-                <form action="/product-listing-submit" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}          
-                    <div class="tab-content">
-                        
-                            <div id="basic" class="profile-edit tab-pane fade in active">
-                            	<div class="sky-form" id="sky-form4">
-                            		<h2 class="heading-md">Provide us with the basic information of the product</h2>
-                                </br>
-                                	<!-- <form class="sky-form" id="sky-form" action=""> -->
-                                    <dl class="dl-horizontal">
-                                        <dt>Product Title</dt>
-                                        <dd>
+                <div class="tab-content">
+                    <div id="basic" class="profile-edit tab-pane fade in active">
+                        <div class="sky-form" id="sky-form4">
+                            <h2 class="heading-md">Provide us with the basic information of the product</h2>
+                            </br>
+                            <form action="/product-listing-submit" method="post" enctype="multipart/form-data" id="listingform">
+                                {% csrf_token %}
+                                <dl class="dl-horizontal">
+                                    <dt>Product Title</dt>
+                                    <dd>
+                                        <section>
+                                            <label class="input">
+                                                <i class="icon-append fa fa-user"></i>
+                                                {% block typeahead %}
+                                                <input type="text" placeholder="Product Title" name="product_title" data-validation="required">
+                                                {% endblock typeahead %}
+                                                <b class="tooltip tooltip-bottom-right">Displayed as the product name everywhere on the website</b>
+                                            </label>
+                                        </section>
+                                    </dd>
+                                    <dt>Select category</dt>
+                                    <dd>
+                                        <section>                                                
+                                            <label class="select">
+                                                <select name="subcategory" data-validation="required">
+                                                    {% for i in sub_category %}
+                                                    <option value="{{ i.id }}">{{ i.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <i></i>
+                                            </label>
 
-                                            <section>
-                                                <label class="input">
-                                                    <i class="icon-append fa fa-user"></i>
-                                                    {% block typeahead %}
-                                                    <input type="text" placeholder="Product Title" name="product_title">
-                                                    {% endblock typeahead %}
-                                                    <b class="tooltip tooltip-bottom-right">Displayed as the product name everywhere on the website</b>
-                                                </label>
-                                            </section>
-                                        </dd>
-                                        <dt>Select category</dt>
-                                        <dd>
-                                            <section>
-                                                <!-- <label class="input">
-                                                    <i class="icon-append fa fa-envelope"></i>
-                                                    <input type="email" placeholder="Email address" name="email">
-                                                    <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
-                                                </label> -->
-                                                
-                                                    <label class="select">
-                                                        <select name="subcategory">
-                                                            <!-- <option disabled="" selected="" value="0">Month</option>
-                                                            <option value="1">January</option>
-                                                            <option value="1">February</option>
-                                                            <option value="3">March</option>
-                                                            <option value="4">April</option>
-                                                            <option value="5">May</option>
-                                                            <option value="6">June</option>
-                                                            <option value="7">July</option>
-                                                            <option value="8">August</option>
-                                                            <option value="9">September</option>
-                                                            <option value="10">October</option>
-                                                            <option value="11">November</option>
-                                                            <option value="12">December</option> -->
-                                                            {% for i in sub_category %}
-                                                                <option value="{{ i.id }}">{{ i.name }}</option>
-                                                            {% endfor %}
-                                                        </select>
-                                                        <i></i>
-                                                    </label>
-                                                
-                                            </section>
-                                        </dd>
-                                        <dt>Product Details</dt>
-                                        <dd>
-                                            <section>
-                                                <label class="textarea">
-                                                    <i class="icon-append fa fa-lock"></i>
-                                                    <textarea name="productdetail" id="InputMessage" rows="3" required></textarea>
-                                                    <b class="tooltip tooltip-bottom-right">Give the product details to help the prospective customers to buy this product</b>
-                                                </label>
-                                            </section>
-                                        </dd>
-                                        <dt>Buying Price</dt>
-                                        <dd>
-                                            <section>
-                                                <label class="input">
-                                                    <i class="icon-append fa fa-user"></i>
-                                                    <input type="text" placeholder="Buying Price of the Product" name="bp">
-                                                    <b class="tooltip tooltip-bottom-right">This will help customers to believe on and your product</b>
-                                                </label>
-                                            </section>
-                                        </dd>
-                                        
-                                        <dt>Pickup Location</dt>
-                                        <dd>
-                                            <section>
-                                                <label class="textarea">
-                                                    <i class="icon-append fa fa-lock"></i>
-                                                    <textarea name="pickuplocation" id="pickupadd" rows="3" required></textarea>
-                                                    <b class="tooltip tooltip-bottom-right">Give us the location from where we have to pick uo the product</b>
-                                                    <input type="hidden" name="pickuplat" id="plat" />
-                                                    <input type="hidden" name="pickuplang" id="plng" />
-                                                    <input type="hidden" name="fadd" id="fadd" />
+                                        </section>
+                                    </dd>
+                                    <dt>Product Details</dt>
+                                    <dd>
+                                        <section>
+                                            <label class="textarea">
+                                                <i class="icon-append fa fa-lock"></i>
+                                                <textarea name="productdetail" id="InputMessage" rows="3" required></textarea>
+                                                <b class="tooltip tooltip-bottom-right">This will help customers to believe on and your product</b>
+                                            </label>
+                                        </section>
+                                    </dd>
+                                    <dt>Buying Price</dt>
+                                    <dd>
+                                        <section>
+                                            <label class="input">
+                                                <i class="icon-append fa fa-user"></i>
+                                                <input type="text" placeholder="Buying Price of the Product" name="bp" data-validation="number" data-validation-allowing="float">
+                                                <b class="tooltip tooltip-bottom-right">Price at which you bought the price</b>
+                                            </label>
+                                        </section>
+                                    </dd>
 
-                                                </label>
-                                            </section>
-                                        </dd>
-                                        <dt>Pincode</dt>
-                                        <dd>
-                                            <section>
-                                                <label class="input">
-                                                    <i class="icon-append fa fa-lock"></i>
-                                                    <input type="text" placeholder="Enter Pincode" name="pincode">
-                                                    <b class="tooltip tooltip-bottom-right">Enter the pincode of the pickup location</b>
-                                                </label>
-                                            </section>
-                                        </dd>    
-                                    </dl>
-                                    <!-- <label class="toggle toggle-change"><input type="checkbox" checked="" name="checkbox-toggle-1"><i></i>Remember password</label>
-                                    </br>
-                                    <section>
-                                        <label class="checkbox"><input type="checkbox" id="terms" name="terms"><i></i><a href="#">I agree with the Terms and Conditions</a></label>
-                                    </section> -->
-                                    <!-- <button type="button" class="btn-u btn-u-default">Cancel</button> -->
-                                    <button class="btn-u btn-u-sea-shop" onclick="tabswitch(1);">Save Changes and Continue</button>
-                               		<!-- </form> -->
-                            	</div>
-                                
-                            </div>
+                                    <dt>Pickup Address</dt>
+                                    <dd>
+                                        <section>
+                                            <label class="textarea">
+                                                <i class="icon-append fa fa-lock"></i>
+                                                <textarea name="pickuplocation" id="pickupadd" rows="3" required></textarea>
+                                                <b class="tooltip tooltip-bottom-right">Provide the complete address with landmark</b>
+                                                <input type="hidden" name="pickuplat" id="plat" />
+                                                <input type="hidden" name="pickuplang" id="plng" />
+                                                <input type="hidden" name="fadd" id="fadd" />
 
-                            <div id="additional" class="profile-edit tab-pane fade">
-                            	<div  class="sky-form" id="sky-form4">
-                            		<h2 class="heading-md">We need some more information about the product.</h2>
-                                <!-- <p>Below are the notifications you may manage.</p> -->
-                                </br>
-                                <!-- <form class="sky-form" id="sky-form" action=""> -->
+                                            </label>
+                                        </section>
+                                    </dd>
+                                    <div class="">
+                                        <iframe width="100%" height="450" frameborder="0" style="border:0" id="map" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBouT7gW2ir_Lt1kQFnSzemVYY67A1CV74&q=indira nagar,bangalore">
+                                        </iframe>
+                                    </div>
+                                    <br />
+                                    <dt>Pincode</dt>
+                                    <dd>
+                                        <section>
+                                            <label class="input">
+                                                <i class="icon-append fa fa-lock"></i>
+                                                <input type="text" placeholder="Enter Pincode" name="pincode" data-validation="number">
+                                                <b class="tooltip tooltip-bottom-right">Enter the pincode of the pickup location</b>
+                                            </label>
+                                        </section>
+                                    </dd>
                                     <label class="toggle"><input type="checkbox" checked="" name="rent" value="1"><i></i>Product available on rent.</label>
                                     <hr>
                                     <label class="toggle"><input type="checkbox" checked="" name="sell" value="1"><i></i>Product available on sale.</label>
@@ -261,13 +384,13 @@ $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
                                     <label class="toggle"><input type="checkbox" checked="" name="available" value="1"><i></i>I will set the product available everytime its available</label>
                                     <p>If not checked, Product will be set to available everytime.</p>
                                     <hr>
-                                    <dt>Renting Price</dt>
+                                    <dt>Rent</dt>
                                     <dd>
                                         <section>
                                             <label class="input">
                                                 <i class="icon-append fa fa-user"></i>
-                                                <input type="text" placeholder="Renting Price of the Product on per day basis" name="rp">
-                                                <b class="tooltip tooltip-bottom-right">This will help customers to believe on and your product</b>
+                                                <input type="text" placeholder="Renting Price of the Product on per day basis" name="rp" data-validation="number" data-validation-allowing="float">
+                                                <b class="tooltip tooltip-bottom-right">Daily rent expected for the product</b>
                                             </label>
                                         </section>
                                     </dd>
@@ -276,142 +399,56 @@ $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
                                         <section>
                                             <label class="input">
                                                 <i class="icon-append fa fa-user"></i>
-                                                <input type="text" placeholder="Buying Price of the Product" name="sp">
-                                                <b class="tooltip tooltip-bottom-right">This will help customers to believe on and your product</b>
+                                                <input type="text" placeholder="Buying Price of the Product" name="sp" data-validation="number" data-validation-allowing="float">
+                                                <b class="tooltip tooltip-bottom-right">If you are ready to sell, mention the price</b>
                                             </label>
                                         </section>
                                     </dd>
-                                    <dt>Any Security Deposits</dt>
+                                    <dt>Security Deposit</dt>
                                     <dd>
                                         <section>
                                             <label class="input">
                                                 <i class="icon-append fa fa-user"></i>
-                                                <input type="text" placeholder="Any security deposits" name="security_deposit">
-                                                <b class="tooltip tooltip-bottom-right">This will help customers to believe on and your product</b>
+                                                <input type="text" placeholder="Any security deposits" name="security_deposit" data-validation="number" data-validation-allowing="float">
+                                                <b class="tooltip tooltip-bottom-right">Good practice is to ask not more 75% of the current value of the product, as big figures may alienate users</b>
                                             </label>
                                         </section>
                                     </dd>
-                                    <dt>Any Explicit Terms and Conditions</dt>
+                                    <dt>Usage Instructions</dt>
                                     <dd>
                                         <section>
                                             <label class="textarea">
                                                 <i class="icon-append fa fa-lock"></i>
                                                 <textarea name="terms_conditions" id="InputMessage" rows="3"></textarea>
-                                                <b class="tooltip tooltip-bottom-right">Give us the location from where we have to pick uo the product</b>
+                                                <b class="tooltip tooltip-bottom-right">Let the users know if you have any additional conditions</b>
                                             </label>
                                         </section>
-                                    </dd>    
-                                    
-                                    <button class="btn-u btn-u-sea-shop" onclick="tabswitch(2);">Save Changes and Continue.</button>
-                                <!-- </form>  -->
-                            	</div>
+                                    </dd>
+                                    <h2 class="heading-md">Upload Pictures of the product</h2>
+                               
+                                    </br>
+                           
+                                    <input type="file" name="pics" multiple />   
+                                </dl>
+                                        
+                                <button type="submit" class="btn-u btn-u-sea-shop">Save and Publish Your Listing.</button>
+                            </form>
+                        </div>
                                 
-                                
-                            </div>
-
-                            <div id="pics" class="profile-edit tab-pane fade">
-                            	
-                            	<h2 class="heading-md">Upload Pictures of the product</h2>
-                                <!-- <p>Below are the payment options for your account.</p> -->
-                                </br>
-                                <!-- <form class="sky-form" id="sky-form" action=""> -->
-                                    <input type="file" name="pics" multiple />
-
-                                    <!--Checkout-Form-->
-                                    <!-- <section>
-                                        <div class="inline-group">
-                                            <label class="radio"><input type="radio" checked="" name="radio-inline"><i class="rounded-x"></i>Visa</label>
-                                            <label class="radio"><input type="radio" name="radio-inline"><i class="rounded-x"></i>MasterCard</label>
-                                            <label class="radio"><input type="radio" name="radio-inline"><i class="rounded-x"></i>PayPal</label>
-                                        </div>
-                                    </section>                  
-
-                                    <section>
-                                        <label class="input">
-                                            <input type="text" name="name" placeholder="Name on card">
-                                        </label>
-                                    </section>
-                                    
-                                    <div class="row">
-                                        <section class="col col-10">
-                                            <label class="input">
-                                                <input type="text" name="card" id="card" placeholder="Card number">
-                                            </label>
-                                        </section>
-                                        <section class="col col-2">
-                                            <label class="input">
-                                                <input type="text" name="cvv" id="cvv" placeholder="CVV2">
-                                            </label>
-                                        </section>
-                                    </div>                                        
-                                    
-                                    <div class="row">
-                                        <label class="label col col-4">Expiration date</label>
-                                        <section class="col col-5">
-                                            <label class="select">
-                                                <select name="month">
-                                                    <option disabled="" selected="" value="0">Month</option>
-                                                    <option value="1">January</option>
-                                                    <option value="1">February</option>
-                                                    <option value="3">March</option>
-                                                    <option value="4">April</option>
-                                                    <option value="5">May</option>
-                                                    <option value="6">June</option>
-                                                    <option value="7">July</option>
-                                                    <option value="8">August</option>
-                                                    <option value="9">September</option>
-                                                    <option value="10">October</option>
-                                                    <option value="11">November</option>
-                                                    <option value="12">December</option>
-                                                </select>
-                                                <i></i>
-                                            </label>
-                                        </section>
-                                        <section class="col col-3">
-                                            <label class="input">
-                                                <input type="text" placeholder="Year" id="year" name="year">
-                                            </label>
-                                        </section>
-                                    </div>
-                                    <button type="button" class="btn-u btn-u-default">Cancel</button>
-                                    <button class="btn-u btn-u-sea-shop" type="submit">Save Changes</button> -->
-                                    <!--End Checkout-Form-->
-
-                                    <button class="btn-u btn-u-sea-shop" onclick="tabswitch(3);">Save Changes and Continue.</button>
-                                <!-- </form>     -->
-                            	<!-- </div> -->
-                                
-                            </div>
-
-                            <div id="publish" class="profile-edit tab-pane fade">
-                            	
-                            	<h2 class="heading-md">Check your details once again to confirm and click on publish.</h2>
-                                <!-- <p>Below are the name and email addresses on file for your account.</p> -->
-                                </br>
-                                <!-- <form class="sky-form" id="sky-form4" action=""> -->
-                                <!-- <button type="button" class="btn-u btn-u-default">Cancel</button> -->
-                                    <button type="submit" class="btn-u btn-u-sea-shop">Save and Publish Your Listing.</button>
-                            	<!-- </form> -->
-                                                           
-                            </div>
-                        
                     </div>
-                </form>
-            </div>    
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
+ <script type="text/javascript">
+     $.validate();
     function tabswitch(i){
         // var i = $(this).attr('id');
         $('#'+(i+1)).trigger('click');
     }
     
-   
+    
     
 </script>
 {% endblock content %}
-
-
-    
-

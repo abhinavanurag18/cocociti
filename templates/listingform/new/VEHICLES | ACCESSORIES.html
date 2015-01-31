@@ -1,0 +1,43 @@
+{% extends "listingform/new/base.html" %}
+{% block addscript %}
+{{ block.super }}
+<script type="text/javascript">
+    $(function(){
+        $('.mandate .input-group.date').datepicker({
+                format: "dd/mm/yyyy",
+                minViewMode: 1
+            });
+    })
+</script>
+{% endblock addscript %}
+{% block otherinfo %}
+<div class="form-group mandate">
+    <label for="InputDate">Manufacturing month and year</label>
+    <div class="input-group date">
+        <input type="text"  class="form-control" name="manmonyear"  data-validation="date" data-validation-format="dd/mm/yyyy"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="InputMileage">Mileage</label>
+    <div class="input-group">
+        <input type="text" class="form-control" id="InputPinCode" name="mileage" placeholder="Enter Mileage" data-validation="number" data-validation-allowed="float" required>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+    </div>
+    <script type="text/javascript">
+        $('#InputPinCode').blur(function(){
+            var pin = $(this).val();
+            if(!(Math.floor(pin) == pin && $.isNumeric(pin))){
+                alert("Not a valid pincode");
+            }
+            else{
+                if((pin.toString().length)!= 6){
+                    alert("Not a valid pincode");
+                }
+            }
+        });
+    </script>
+</div>
+{{ block.super }}
+
+{% endblock otherinfo %}
